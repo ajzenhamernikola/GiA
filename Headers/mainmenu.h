@@ -6,7 +6,7 @@
 #include <QVector>
 #include <QtAlgorithms>
 
-#include "node.h"
+#include "../Headers/node.h"
 
 namespace Ui {
 class MainMenu;

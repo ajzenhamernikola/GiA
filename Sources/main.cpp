@@ -1,4 +1,4 @@
-#include "mainmenu.h"
+#include "../Headers/mainmenu.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

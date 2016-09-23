@@ -12,11 +12,11 @@ TARGET = GiA
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainmenu.cpp \
-    node.cpp
+SOURCES += Sources/main.cpp \
+    Sources/mainmenu.cpp \
+    Sources/node.cpp
 
-HEADERS  += mainmenu.h \
-    node.h
+HEADERS  += Headers/mainmenu.h \
+    Headers/node.h
 
-FORMS    += mainmenu.ui
+FORMS    += Forms/mainmenu.ui

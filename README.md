@@ -6,7 +6,7 @@ A GUI-oriented, graph problem-solving software.
 
 ## Development
 GiA is in a very early development stage. You can see the list of the things that have been successfully developed so far, as well as the next feature that is being worked on right now.
-- [x] Complete GUI prototype.
+- [ ] Complete GUI prototype.
 - [ ] Implement button procedures.
 - [ ] ...
 

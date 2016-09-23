@@ -2,6 +2,11 @@
 #define MAINMENU_H
 
 #include <QWidget>
+#include <QGraphicsScene>
+#include <QVector>
+#include <QtAlgorithms>
+
+#include "node.h"
 
 namespace Ui {
 class MainMenu;
@@ -15,8 +20,13 @@ public:
     explicit MainMenu(QWidget *parent = 0);
     ~MainMenu();
 
+private slots:
+    void on_pb_addNode_clicked();
+
 private:
-    Ui::MainMenu *ui;
+    Ui::MainMenu *m_ui;
+    QGraphicsScene *m_scene;
+    QVector<Node*> m_nodes;
 };
 
 #endif // MAINMENU_H

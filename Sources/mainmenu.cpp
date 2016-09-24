@@ -17,6 +17,8 @@ MainMenu::MainMenu(QWidget *parent) :
 
     m_scene = new QGraphicsScene();
     m_ui->gv_graph->setScene(m_scene);
+    m_ui->gv_graph->setRenderHint(QPainter::Antialiasing);
+    m_ui->gv_graph->setRenderHint(QPainter::HighQualityAntialiasing);
 }
 
 MainMenu::~MainMenu()

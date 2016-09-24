@@ -7,6 +7,7 @@ Node::Node(int value)
       m_active(false)
 {
     setFlag(GraphicsItemFlag::ItemIsMovable);
+    setZValue(NODE_Z_VALUE);
 }
 
 QRectF Node::boundingRect() const
@@ -30,6 +31,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         pen.setColor(Qt::black);
     }
     painter->setPen(pen);
+    painter->setBrush(Qt::white);
     painter->drawEllipse(boundingRect());
     painter->drawText(-3, 4, QString::number(m_value));
 }

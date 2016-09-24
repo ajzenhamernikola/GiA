@@ -49,7 +49,10 @@ void MainMenu::nodeActivated(Node *node)
         second = node;
         numberOfActiveNodes++;
         // TODO: Create an edge here
-        std::cout << "Creating edge (" << first->value() << ", " << second->value() << ")" << std::endl;
+        std::cout << "Creating edge (" << first->value() << ", " << second->value() << "), with weight 1" << std::endl;
+        Edge *newEdge = new Edge(first, second);
+        m_scene->addItem(newEdge);
+        m_edges.push_back(newEdge);
         // END TODO
         first->deactivate();
         second->deactivate();

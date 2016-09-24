@@ -7,6 +7,7 @@
 #include <QtAlgorithms>
 
 #include "../Headers/node.h"
+#include "../Headers/edge.h"
 
 namespace Ui {
 class MainMenu;
@@ -30,6 +31,7 @@ private:
     Ui::MainMenu *m_ui;
     QGraphicsScene *m_scene;
     QVector<Node*> m_nodes;
+    QVector<Edge*> m_edges;
 };
 
 #endif // MAINMENU_H

@@ -23,6 +23,9 @@ public:
 private slots:
     void on_pb_addNode_clicked();
 
+    void nodeActivated(Node *node);
+    void nodeDeactivated(Node *node);
+
 private:
     Ui::MainMenu *m_ui;
     QGraphicsScene *m_scene;

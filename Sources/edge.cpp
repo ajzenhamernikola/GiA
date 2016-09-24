@@ -34,8 +34,10 @@ QRectF Edge::boundingRect() const
     return QRectF(left, top, right - left, bottom - top);
 }
 
-void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR)
+void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    (void)option;
+    (void)widget;
     painter->setPen(Qt::black);
     painter->drawLine(QLineF(m_from->pos(), m_to->pos()));
 }

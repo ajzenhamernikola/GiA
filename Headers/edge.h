@@ -20,6 +20,9 @@ public:
 
     void setValue(int value);
 
+public slots:
+    void nodeMoved();
+
 private:
     Node *m_from;
     Node *m_to;

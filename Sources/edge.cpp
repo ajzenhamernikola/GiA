@@ -56,3 +56,10 @@ void Edge::setValue(int value)
 {
     m_value = value;
 }
+
+// public slots
+
+void Edge::nodeMoved()
+{
+    update();
+}

@@ -8,10 +8,11 @@ A GUI-oriented, graph problem-solving C++ software.
 GiA is in a very early development stage. You can see the list of the things that have been successfully developed so far, as well as the next feature that is being worked on right now.
 - [x] GUI prototype completed
 - [ ] Graphic representation of graph implemented
-  - [x] nodes
-  - [ ] edges
-  - [ ] everything is functioning as one
-  - [ ] matrix representation
+  - [x] creation of nodes
+  - [x] creation of edges
+  - [ ] deletion of nodes
+  - [ ] deletion of edges
+- [ ] Matrix representation
 - [ ] Implement button procedures
 - [ ] ...
 

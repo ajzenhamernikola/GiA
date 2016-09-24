@@ -10,6 +10,7 @@ Edge::Edge(Node *from, Node *to, int value)
 
 QRectF Edge::boundingRect() const
 {
+    qreal penWidth = 1;
     qreal left, top, right, bottom;
     if(m_from->pos().x() < m_to->pos().x())
     {
@@ -24,14 +25,14 @@ QRectF Edge::boundingRect() const
     if(m_from->pos().y() < m_to->pos().y())
     {
         top = m_from->pos().y();
-        bottom = m_from->pos().y();
+        bottom = m_to->pos().y();
     }
     else
     {
         top = m_to->pos().y();
         bottom = m_from->pos().y();
     }
-    return QRectF(left, top, right - left, bottom - top);
+    return QRectF(left - penWidth/2, top - penWidth/2, right - left + penWidth, bottom - top + penWidth);
 }
 
 void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -39,7 +40,7 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     (void)option;
     (void)widget;
     painter->setPen(Qt::black);
-    painter->drawLine(QLineF(m_from->pos(), m_to->pos()));
+    painter->drawLine(m_from->pos(), m_to->pos());
 }
 
 int Edge::value() const
@@ -61,5 +62,6 @@ void Edge::setValue(int value)
 
 void Edge::nodeMoved()
 {
+    prepareGeometryChange();
     update();
 }

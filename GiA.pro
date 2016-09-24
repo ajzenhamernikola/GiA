@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += Sources/main.cpp \
     Sources/mainmenu.cpp \
-    Sources/node.cpp
+    Sources/node.cpp \
+    Sources/edge.cpp
 
 HEADERS  += Headers/mainmenu.h \
-    Headers/node.h
+    Headers/node.h \
+    Headers/edge.h
 
 FORMS    += Forms/mainmenu.ui

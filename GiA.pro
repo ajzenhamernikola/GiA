@@ -22,3 +22,6 @@ HEADERS  += Headers/mainmenu.h \
     Headers/edge.h
 
 FORMS    += Forms/mainmenu.ui
+
+DISTFILES += \
+    README.md

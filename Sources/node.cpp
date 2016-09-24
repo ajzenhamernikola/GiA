@@ -34,18 +34,36 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawText(-3, 4, QString::number(m_value));
 }
 
-// protected
-
-void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
+int Node::value() const
 {
-    QGraphicsItem::mousePressEvent(event);
-    m_active = !m_active;
+    return m_value;
+}
+
+bool Node::operator==(const Node& other) const
+{
+    return value() == other.value();
+}
+
+void Node::deactivate()
+{
+    m_active = false;
     update();
 }
 
-void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+// protected
+
+void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::mouseMoveEvent(event);
-    m_active = false;
+    QGraphicsObject::mouseDoubleClickEvent(event);
+    m_active = !m_active;
     update();
+
+    if(m_active)
+    {
+        emit this->activated(this);
+    }
+    else
+    {
+        emit this->deactivated(this);
+    }
 }

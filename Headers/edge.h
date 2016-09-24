@@ -10,7 +10,10 @@
 class Edge : public QGraphicsObject
 {
 public:
-    Edge(Node *from, Node *to, int value = 1);
+    explicit Edge(Node *from, Node *to, int value = 1);
+
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 
     int value() const;
     QPair<int, int> nodes() const;

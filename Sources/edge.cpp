@@ -8,6 +8,38 @@ Edge::Edge(Node *from, Node *to, int value)
 
 }
 
+QRectF Edge::boundingRect() const
+{
+    qreal left, top, right, bottom;
+    if(m_from->pos().x() < m_to->pos().x())
+    {
+        left = m_from->pos().x();
+        right = m_to->pos().x();
+    }
+    else
+    {
+        left = m_to->pos().x();
+        right = m_from->pos().x();
+    }
+    if(m_from->pos().y() < m_to->pos().y())
+    {
+        top = m_from->pos().y();
+        bottom = m_from->pos().y();
+    }
+    else
+    {
+        top = m_to->pos().y();
+        bottom = m_from->pos().y();
+    }
+    return QRectF(left, top, right - left, bottom - top);
+}
+
+void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR)
+{
+    painter->setPen(Qt::black);
+    painter->drawLine(QLineF(m_from->pos(), m_to->pos()));
+}
+
 int Edge::value() const
 {
     return m_value;

@@ -48,14 +48,13 @@ void MainMenu::nodeActivated(Node *node)
     {
         second = node;
         numberOfActiveNodes++;
-        // TODO: Create an edge here
-        std::cout << "Creating edge (" << first->value() << ", " << second->value() << "), with weight 1" << std::endl;
         Edge *newEdge = new Edge(first, second);
-        QObject::connect(first, SIGNAL(moved()), newEdge, SLOT(nodeMoved()));
-        QObject::connect(second, SIGNAL(moved()), newEdge, SLOT(nodeMoved()));
+        QObject::connect(first,  SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));
+        QObject::connect(first,  SIGNAL(yChanged()), newEdge, SLOT(nodeMoved()));
+        QObject::connect(second, SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));
+        QObject::connect(second, SIGNAL(yChanged()), newEdge, SLOT(nodeMoved()));
         m_scene->addItem(newEdge);
         m_edges.push_back(newEdge);
-        // END TODO
         first->deactivate();
         second->deactivate();
         first = second = 0;

@@ -7,6 +7,8 @@
 
 #include "../Headers/node.h"
 
+#define EDGE_Z_VALUE -1
+
 class Edge : public QGraphicsObject
 {
     Q_OBJECT

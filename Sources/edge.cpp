@@ -5,7 +5,7 @@
 Edge::Edge(Node *from, Node *to, int value)
     : m_from(from), m_to(to), m_value(value)
 {
-
+    setZValue(EDGE_Z_VALUE);
 }
 
 QRectF Edge::boundingRect() const

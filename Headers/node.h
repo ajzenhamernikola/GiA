@@ -4,6 +4,8 @@
 #include <QGraphicsObject>
 #include <QtGui>
 
+#define NODE_Z_VALUE 1
+
 class Node : public QGraphicsObject
 {
     Q_OBJECT

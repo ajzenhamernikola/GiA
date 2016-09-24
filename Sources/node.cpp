@@ -52,6 +52,12 @@ void Node::deactivate()
 
 // protected
 
+void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsObject::mouseMoveEvent(event);
+    emit this->moved();
+}
+
 void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsObject::mouseDoubleClickEvent(event);

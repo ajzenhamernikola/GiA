@@ -22,8 +22,10 @@ public:
 signals:
     void activated(Node* node);
     void deactivated(Node* node);
+    void moved();
 
 protected:
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
 private:

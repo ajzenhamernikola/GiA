@@ -9,6 +9,8 @@
 
 class Edge : public QGraphicsObject
 {
+    Q_OBJECT
+
 public:
     explicit Edge(Node *from, Node *to, int value = 1);
 

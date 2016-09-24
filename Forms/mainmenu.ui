@@ -76,7 +76,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Graph creation</string>
+            <string>Graph creation area</string>
            </property>
           </widget>
          </item>

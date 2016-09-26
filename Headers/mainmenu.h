@@ -9,6 +9,7 @@
 
 #include "../Headers/node.h"
 #include "../Headers/edge.h"
+#include "../Headers/edgevaluetext.h"
 
 namespace Ui {
 class MainMenu;
@@ -24,6 +25,7 @@ public:
 
 private slots:
     void on_pb_addNode_clicked();
+    void on_pb_new_clicked();
 
     void nodeActivated(Node *node);
     void nodeDeactivated(Node *node);
@@ -33,6 +35,7 @@ private:
     QGraphicsScene *m_scene;
     QVector<Node*> m_nodes;
     QVector<Edge*> m_edges;
+    QVector<EdgeValueText*> m_edgeValueTexts;
 };
 
 #endif // MAINMENU_H

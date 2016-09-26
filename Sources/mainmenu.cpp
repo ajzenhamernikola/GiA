@@ -71,6 +71,7 @@ void MainMenu::nodeActivated(Node *node)
         m_scene->addItem(etv);
         m_scene->addItem(newEdge);
         m_edges.push_back(newEdge);
+        m_edgeValueTexts.push_back(etv);
         first->deactivate();
         second->deactivate();
         first = second = 0;
@@ -86,4 +87,46 @@ void MainMenu::nodeDeactivated(Node *node)
     }
     second = 0;
     numberOfActiveNodes--;
+}
+
+void MainMenu::on_pb_new_clicked()
+{
+    auto edgesBegin = m_edges.begin();
+    auto edgesEnd = m_edges.end();
+    for(; edgesBegin != edgesEnd; edgesBegin++)
+    {
+        m_scene->removeItem(*edgesBegin);
+        delete *edgesBegin;
+    }
+    if(!m_edges.empty())
+    {
+        m_edges.clear();
+    }
+
+    auto nodesBegin = m_nodes.begin();
+    auto nodesEnd = m_nodes.end();
+    for(; nodesBegin != nodesEnd; nodesBegin++)
+    {
+        m_scene->removeItem(*nodesBegin);
+        delete *nodesBegin;
+    }
+    if(!m_nodes.empty())
+    {
+        m_nodes.clear();
+    }
+
+    auto etvBegin = m_edgeValueTexts.begin();
+    auto etvEnd = m_edgeValueTexts.end();
+    for(; etvBegin != etvEnd; etvBegin++)
+    {
+        m_scene->removeItem(*etvBegin);
+        delete *etvBegin;
+    }
+    if(!m_edgeValueTexts.empty())
+    {
+        m_edgeValueTexts.clear();
+    }
+
+    first = second = 0;
+    numberOfActiveNodes = 0;
 }

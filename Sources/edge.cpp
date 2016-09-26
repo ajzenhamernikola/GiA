@@ -53,9 +53,15 @@ QPair<int, int> Edge::nodes() const
     return QPair<int, int>(m_from->value(), m_to->value());
 }
 
+QPair<Node *, Node *> Edge::realNodes() const
+{
+    return QPair<Node *, Node *>(m_from, m_to);
+}
+
 void Edge::setValue(int value)
 {
     m_value = value;
+    emit valueChanged();
 }
 
 // public slots
@@ -63,5 +69,6 @@ void Edge::setValue(int value)
 void Edge::nodeMoved()
 {
     prepareGeometryChange();
+    emit moved();
     update();
 }

@@ -22,10 +22,17 @@ public:
     int value() const;
     QPair<int, int> nodes() const;
 
+    // TODO: think of a better name for this
+    QPair<Node *, Node *> realNodes() const;
+
     void setValue(int value);
 
 public slots:
     void nodeMoved();
+
+signals:
+    void moved();
+    void valueChanged();
 
 private:
     Node *m_from;

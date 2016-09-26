@@ -2,8 +2,9 @@
 
 // public
 
-Node::Node(int value)
-    : m_value(value),
+Node::Node(QGraphicsScene *parent, int value)
+    : m_parent(parent),
+      m_value(value),
       m_active(false)
 {
     setFlag(GraphicsItemFlag::ItemIsMovable);

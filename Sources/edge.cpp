@@ -2,8 +2,8 @@
 
 // public
 
-Edge::Edge(Node *from, Node *to, int value)
-    : m_from(from), m_to(to), m_value(value)
+Edge::Edge(QGraphicsScene *parent, Node *from, Node *to, int value)
+    : m_parent(parent), m_from(from), m_to(to), m_value(value)
 {
     setZValue(EDGE_Z_VALUE);
 }

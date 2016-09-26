@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include <QGraphicsObject>
+#include <QGraphicsScene>
 #include <QtGui>
 
 #define NODE_Z_VALUE 1
@@ -11,7 +12,7 @@ class Node : public QGraphicsObject
     Q_OBJECT
 
 public:
-    explicit Node(int value);
+    explicit Node(QGraphicsScene *parent, int value);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
@@ -31,6 +32,7 @@ protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
 private:
+    QGraphicsScene *m_parent;
     int m_value;
     bool m_active;
 };

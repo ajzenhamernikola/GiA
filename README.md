@@ -7,7 +7,7 @@ A GUI-oriented, graph problem-solving C++ software.
 ## Usage
 
 Currently, the user is able to create nodes, create edges, and to move nodes along with adjacent edges.
-- To create a node, just click on *New node* button, and a new node will appear. You can drag & drop nodes everywhere around the *Graph creating* area.
+- To create a node, just click on *Add node* button, and a new node will appear. You can drag & drop nodes everywhere around the *Graph creating area*.
 - To create an edge, double click on a node where you want an edge to begin (the selected node will be highlighted in red), and double click on another node where you want edge to end, and a new edge will appear. To cancel edge creation, just double click on a beginning edge. Currently, loops are not supported.
 - If you move a node, all adjacent edges will be moved with it.
 

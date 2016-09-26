@@ -2,8 +2,6 @@
 #include "../Headers/edgevaluetext.h"
 #include "ui_mainmenu.h"
 
-#include <iostream>
-
 // public
 
 int numberOfActiveNodes = 0;
@@ -52,9 +50,16 @@ void MainMenu::nodeActivated(Node *node)
         second = node;
         numberOfActiveNodes++;
 
-        // TODO: implement an edge factory
-        // 1204 is put just to test how the floating text behaves
-        Edge *newEdge = new Edge(m_scene, first, second, 1204);
+        Edge *newEdge;
+        if(m_ui->cb_weighted->isChecked())
+        {
+            int weight = QInputDialog::getInt(this, QString("Enter weight"), QString("Weight"));
+            newEdge = new Edge(m_scene, first, second, weight);
+        }
+        else
+        {
+            newEdge = new Edge(m_scene, first, second, 1);
+        }
         QObject::connect(first,  SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));
         QObject::connect(first,  SIGNAL(yChanged()), newEdge, SLOT(nodeMoved()));
         QObject::connect(second, SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));

@@ -76,7 +76,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Graph creation area</string>
+            <string>Graph creating area</string>
            </property>
           </widget>
          </item>
@@ -221,12 +221,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pb_addEdge">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
+      <widget class="QCheckBox" name="cb_weighted">
        <property name="text">
-        <string>Add edge</string>
+        <string>Weighted graph</string>
        </property>
       </widget>
      </item>

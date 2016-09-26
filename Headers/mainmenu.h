@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QVector>
 #include <QtAlgorithms>
+#include <QInputDialog>
 
 #include "../Headers/node.h"
 #include "../Headers/edge.h"

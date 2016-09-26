@@ -2,6 +2,7 @@
 #include "ui_mainmenu.h"
 
 #include <iostream>
+#include "../Headers/edgevaluetext.h"
 
 // public
 
@@ -50,11 +51,17 @@ void MainMenu::nodeActivated(Node *node)
     {
         second = node;
         numberOfActiveNodes++;
-        Edge *newEdge = new Edge(first, second);
+
+        // TODO: implement an edge factory
+        // 1204 is put just to test how the floating text behaves
+        Edge *newEdge = new Edge(first, second, 1204);
         QObject::connect(first,  SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));
         QObject::connect(first,  SIGNAL(yChanged()), newEdge, SLOT(nodeMoved()));
         QObject::connect(second, SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));
         QObject::connect(second, SIGNAL(yChanged()), newEdge, SLOT(nodeMoved()));
+
+        EdgeValueText *etv = new EdgeValueText(newEdge);
+        m_scene->addItem(etv);
         m_scene->addItem(newEdge);
         m_edges.push_back(newEdge);
         first->deactivate();

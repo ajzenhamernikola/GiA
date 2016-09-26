@@ -21,10 +21,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 
     int value() const;
-    QPair<int, int> nodes() const;
+    QPair<int, int> nodeValues() const;
 
-    // TODO: think of a better name for this
-    QPair<Node *, Node *> realNodes() const;
+    QPair<Node *, Node *> nodes() const;
 
     void setValue(int value);
 

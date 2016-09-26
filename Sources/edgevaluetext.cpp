@@ -23,8 +23,8 @@ void EdgeValueText::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 void EdgeValueText::edgeMoved()
 {
     setPos(m_edge->boundingRect().center());
-    qreal angle = QLineF(m_edge->realNodes().first->pos(),
-                              m_edge->realNodes().second->pos()).angle();
+    qreal angle = QLineF(m_edge->nodes().first->pos(),
+                              m_edge->nodes().second->pos()).angle();
     if ((angle > 90 && angle <= 180) || (angle > 270 && angle <= 360))
     {
         moveBy(0, -boundingRect().height());

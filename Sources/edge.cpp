@@ -48,12 +48,12 @@ int Edge::value() const
     return m_value;
 }
 
-QPair<int, int> Edge::nodes() const
+QPair<int, int> Edge::nodeValues() const
 {
     return QPair<int, int>(m_from->value(), m_to->value());
 }
 
-QPair<Node *, Node *> Edge::realNodes() const
+QPair<Node *, Node *> Edge::nodes() const
 {
     return QPair<Node *, Node *>(m_from, m_to);
 }

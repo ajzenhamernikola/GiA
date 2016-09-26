@@ -14,6 +14,8 @@ MainMenu::MainMenu(QWidget *parent) :
 {
     m_ui->setupUi(this);
 
+    setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
+
     m_scene = new QGraphicsScene();
     m_ui->gv_graph->setScene(m_scene);
     m_ui->gv_graph->setRenderHint(QPainter::Antialiasing);

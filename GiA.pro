@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = GiA
 TEMPLATE = app
 
+RC_ICONS += Resources/Icons/GiA.ico
 
 SOURCES += Sources/main.cpp \
     Sources/mainmenu.cpp \

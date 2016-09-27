@@ -2,7 +2,7 @@
 A GUI-oriented, graph problem-solving C++ software.
 
 ## About
-*GiA* is a software built in **C++** programming language with **Qt5** libraries. It allows a user to input a desired graph and run a desired graph algorithm (such as *finding shortest paths*, *constructing a minimum cost spanning tree*, *finding transitive closure*, ...) on it.
+*GiA* is a software built in **C++** programming language with **Qt5** library. It allows a user to input a desired graph and run a desired graph algorithm (such as *finding shortest paths*, *constructing a minimum cost spanning tree*, *finding transitive closure*, ...) on it.
 
 ## Usage
 
@@ -19,12 +19,13 @@ GiA is in a very early development stage. You can see the list of the things tha
   - [x] Creation of edges
   - [ ] Deletion of nodes
   - [ ] Deletion of edges
-- [ ] Matrix representation
-- [ ] Implement button procedures
-  - [x] Exit
+- [ ] Implement basic graph procedures
   - [x] Add node
-  - [ ] Add edge
+  - [x] New graph
+  - [ ] Insert a weighted edge
+  - [ ] Change edge's weight
   - [ ] ...
+- [ ] Matrix representation
 - [ ] ...
 
 ## Contact

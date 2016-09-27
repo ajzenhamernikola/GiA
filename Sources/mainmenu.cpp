@@ -91,40 +91,21 @@ void MainMenu::nodeDeactivated(Node *node)
 
 void MainMenu::on_pb_new_clicked()
 {
-    auto edgesBegin = m_edges.begin();
-    auto edgesEnd = m_edges.end();
-    for(; edgesBegin != edgesEnd; edgesBegin++)
+    m_scene->clear();
+
+    if(!m_edgeValueTexts.empty())
     {
-        m_scene->removeItem(*edgesBegin);
-        delete *edgesBegin;
+        m_edgeValueTexts.clear();
     }
+
     if(!m_edges.empty())
     {
         m_edges.clear();
     }
 
-    auto nodesBegin = m_nodes.begin();
-    auto nodesEnd = m_nodes.end();
-    for(; nodesBegin != nodesEnd; nodesBegin++)
-    {
-        m_scene->removeItem(*nodesBegin);
-        delete *nodesBegin;
-    }
     if(!m_nodes.empty())
     {
         m_nodes.clear();
-    }
-
-    auto etvBegin = m_edgeValueTexts.begin();
-    auto etvEnd = m_edgeValueTexts.end();
-    for(; etvBegin != etvEnd; etvBegin++)
-    {
-        m_scene->removeItem(*etvBegin);
-        delete *etvBegin;
-    }
-    if(!m_edgeValueTexts.empty())
-    {
-        m_edgeValueTexts.clear();
     }
 
     first = second = 0;

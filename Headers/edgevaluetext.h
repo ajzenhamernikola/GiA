@@ -2,7 +2,10 @@
 #define EDGEVALUETEXT_H
 
 #include <QGraphicsTextItem>
-#include "edge.h"
+#include "../Headers/edge.h"
+
+// Forward declaration
+class Edge;
 
 class EdgeValueText : public QGraphicsTextItem
 {

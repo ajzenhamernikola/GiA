@@ -35,7 +35,6 @@ private:
     QGraphicsScene *m_scene;
     QVector<Node*> m_nodes;
     QVector<Edge*> m_edges;
-    QVector<EdgeValueText*> m_edgeValueTexts;
 };
 
 #endif // MAINMENU_H

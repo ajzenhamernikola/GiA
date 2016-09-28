@@ -1,5 +1,6 @@
 #include "../Headers/mainmenu.h"
 #include "../Headers/edgevaluetext.h"
+#include "../Headers/edgefactory.h"
 #include "ui_mainmenu.h"
 
 // public
@@ -55,23 +56,17 @@ void MainMenu::nodeActivated(Node *node)
         Edge *newEdge;
         if(m_ui->cb_weighted->isChecked())
         {
-            int weight = QInputDialog::getInt(this, QString("Enter weight"), QString("Weight"));
-            newEdge = new Edge(m_scene, first, second, weight);
+            int weight = QInputDialog::getInt(this, QString("Enter weight"), QString("Weight"));;
+            newEdge = EdgeFactory::getEdge(first, second, weight);
+
         }
         else
         {
-            newEdge = new Edge(m_scene, first, second, 1);
+            newEdge = EdgeFactory::getEdge(first, second);
         }
-        QObject::connect(first,  SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));
-        QObject::connect(first,  SIGNAL(yChanged()), newEdge, SLOT(nodeMoved()));
-        QObject::connect(second, SIGNAL(xChanged()), newEdge, SLOT(nodeMoved()));
-        QObject::connect(second, SIGNAL(yChanged()), newEdge, SLOT(nodeMoved()));
 
-        EdgeValueText *etv = new EdgeValueText(newEdge);
-        m_scene->addItem(etv);
         m_scene->addItem(newEdge);
         m_edges.push_back(newEdge);
-        m_edgeValueTexts.push_back(etv);
         first->deactivate();
         second->deactivate();
         first = second = 0;
@@ -92,11 +87,6 @@ void MainMenu::nodeDeactivated(Node *node)
 void MainMenu::on_pb_new_clicked()
 {
     m_scene->clear();
-
-    if(!m_edgeValueTexts.empty())
-    {
-        m_edgeValueTexts.clear();
-    }
 
     if(!m_edges.empty())
     {

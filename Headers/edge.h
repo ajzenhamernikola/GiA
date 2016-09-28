@@ -6,16 +6,20 @@
 #include <QtGui>
 #include <QPair>
 
-#include "node.h"
+#include "../Headers/node.h"
+#include "../Headers/edgevaluetext.h"
 
 #define EDGE_Z_VALUE -1
+
+// Forward declaration
+class EdgeValueText;
 
 class Edge : public QGraphicsObject
 {
     Q_OBJECT
 
 public:
-    explicit Edge(QGraphicsScene *parent, Node *from, Node *to, int value = 1);
+    explicit Edge(Node *from, Node *to, int value = 1);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
@@ -27,6 +31,9 @@ public:
 
     void setValue(int value);
 
+    EdgeValueText *evt() const;
+    void setEvt(EdgeValueText *evt);
+
 public slots:
     void nodeMoved();
 
@@ -35,10 +42,10 @@ signals:
     void valueChanged();
 
 private:
-    QGraphicsScene *m_parent;
     Node *m_from;
     Node *m_to;
     int m_value;
+    EdgeValueText *m_evt;
 };
 
 #endif // EDGE_H

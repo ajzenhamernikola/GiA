@@ -2,10 +2,11 @@
 
 // public
 
-Edge::Edge(QGraphicsScene *parent, Node *from, Node *to, int value)
-    : m_parent(parent), m_from(from), m_to(to), m_value(value)
+Edge::Edge(Node *from, Node *to, int value)
+    : m_from(from), m_to(to), m_value(value)
 {
     setZValue(EDGE_Z_VALUE);
+    m_evt = new EdgeValueText(this);
 }
 
 QRectF Edge::boundingRect() const
@@ -62,6 +63,16 @@ void Edge::setValue(int value)
 {
     m_value = value;
     emit valueChanged();
+}
+
+EdgeValueText *Edge::evt() const
+{
+    return m_evt;
+}
+
+void Edge::setEvt(EdgeValueText *evt)
+{
+    m_evt = evt;
 }
 
 // public slots

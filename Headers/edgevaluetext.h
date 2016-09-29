@@ -12,13 +12,12 @@ class EdgeValueText : public QGraphicsTextItem
     Q_OBJECT
 
 public:
-    /* TODO:
-     * implement a mechanism that allows the user to edit the edge value by clicking on the text
-     */
     EdgeValueText(Edge *edge);
 
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
+protected:
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
+    virtual void keyPressEvent(QKeyEvent *e);
+    virtual void focusOutEvent(QFocusEvent *e);
 
 public slots:
     void edgeMoved();

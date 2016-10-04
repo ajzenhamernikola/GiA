@@ -16,6 +16,7 @@ public:
 
 protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
+    virtual QRectF boundingRect() const;
     virtual void keyPressEvent(QKeyEvent *e);
     virtual void focusOutEvent(QFocusEvent *e);
 

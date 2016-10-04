@@ -17,7 +17,7 @@ Edge::Edge(Node *from, Node *to, int value)
 
 QRectF Edge::boundingRect() const
 {
-    qreal penWidth = 1;
+    qreal penWidth = 6;
     qreal left, top, right, bottom;
     if(m_from->pos().x() < m_to->pos().x())
     {
@@ -30,8 +30,7 @@ QRectF Edge::boundingRect() const
         right = m_from->pos().x();
     }
     if(m_from->pos().y() < m_to->pos().y())
-    {
-        top = m_from->pos().y();
+    { top = m_from->pos().y();
         bottom = m_to->pos().y();
     }
     else
@@ -46,8 +45,23 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     (void)option;
     (void)widget;
+    QLineF line(m_from->pos(), m_to->pos());
     painter->setPen(Qt::black);
-    painter->drawLine(m_from->pos(), m_to->pos());
+    painter->drawLine(line);
+    //painter->drawRect(boundingRect());
+
+    QPointF top = line.pointAt((line.length() - 10) / line.length());
+    QPointF bottom = line.pointAt((line.length() - 20) / line.length());
+    qreal angle = -1 * QLineF(bottom, top).normalVector().angle();
+    int len = 3;
+    QPointF bLeft(bottom.x() + qCos(qDegreesToRadians(angle)) * len,
+                  bottom.y() + qSin(qDegreesToRadians(angle)) * len);
+    QPointF bRight(bottom.x() + qCos(qDegreesToRadians(angle)) * -len,
+                  bottom.y() + qSin(qDegreesToRadians(angle)) * -len);
+
+    QVector<QPoint> pts{top.toPoint(), bLeft.toPoint(), bRight.toPoint()};
+    painter->setBrush(Qt::black);
+    painter->drawPolygon(pts);
 }
 
 int Edge::value() const

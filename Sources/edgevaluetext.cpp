@@ -20,6 +20,11 @@ void EdgeValueText::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     QGraphicsTextItem::paint(painter, option, widget);
 }
 
+QRectF EdgeValueText::boundingRect() const
+{
+    return QGraphicsTextItem::boundingRect();
+}
+
 void EdgeValueText::keyPressEvent(QKeyEvent *e)
 {
     if (hasFocus())

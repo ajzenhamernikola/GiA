@@ -6,6 +6,12 @@ Edge::Edge(Node *from, Node *to, int value)
     : m_from(from), m_to(to), m_value(value)
 {
     setZValue(EDGE_Z_VALUE);
+
+    QObject::connect(from,  SIGNAL(xChanged()), this, SLOT(nodeMoved()));
+    QObject::connect(from,  SIGNAL(yChanged()), this, SLOT(nodeMoved()));
+    QObject::connect(to,    SIGNAL(xChanged()), this, SLOT(nodeMoved()));
+    QObject::connect(to,    SIGNAL(yChanged()), this, SLOT(nodeMoved()));
+
     m_evt = new EdgeValueText(this);
 }
 

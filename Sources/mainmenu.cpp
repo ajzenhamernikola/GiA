@@ -1,6 +1,5 @@
 #include "../Headers/mainmenu.h"
 #include "../Headers/edgevaluetext.h"
-#include "../Headers/edgefactory.h"
 #include "ui_mainmenu.h"
 
 // public
@@ -57,12 +56,12 @@ void MainMenu::nodeActivated(Node *node)
         if(m_ui->cb_weighted->isChecked())
         {
             int weight = QInputDialog::getInt(this, QString("Enter weight"), QString("Weight"));;
-            newEdge = EdgeFactory::getEdge(first, second, weight);
+            newEdge = new Edge(first, second, weight);
 
         }
         else
         {
-            newEdge = EdgeFactory::getEdge(first, second);
+            newEdge = new Edge(first, second);
         }
 
         m_scene->addItem(newEdge);

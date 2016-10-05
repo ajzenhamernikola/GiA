@@ -7,9 +7,10 @@
 #include <QtAlgorithms>
 #include <QInputDialog>
 
-#include "../Headers/node.h"
-#include "../Headers/edge.h"
-#include "../Headers/edgevaluetext.h"
+#include "Headers/node.h"
+#include "Headers/edge.h"
+#include "Headers/edgevaluetext.h"
+#include "Headers/graph.h"
 
 namespace Ui {
 class MainMenu;
@@ -35,6 +36,7 @@ private:
     QGraphicsScene *m_scene;
     QVector<Node*> m_nodes;
     QVector<Edge*> m_edges;
+    Graph *m_graph;
 };
 
 #endif // MAINMENU_H

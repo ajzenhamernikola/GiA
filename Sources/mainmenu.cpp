@@ -1,6 +1,6 @@
-#include "../Headers/mainmenu.h"
-#include "../Headers/edgevaluetext.h"
-#include "../Headers/edgefactory.h"
+#include "Headers/mainmenu.h"
+#include "Headers/edgevaluetext.h"
+#include "Headers/edgefactory.h"
 #include "ui_mainmenu.h"
 
 // public
@@ -15,18 +15,19 @@ MainMenu::MainMenu(QWidget *parent) :
 {
     m_ui->setupUi(this);
 
-    setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
-
     m_scene = new QGraphicsScene();
     m_ui->gv_graph->setScene(m_scene);
     m_ui->gv_graph->setRenderHint(QPainter::Antialiasing);
     m_ui->gv_graph->setRenderHint(QPainter::HighQualityAntialiasing);
+
+    m_graph = new Graph();
 }
 
 MainMenu::~MainMenu()
 {
     delete m_ui;
     delete m_scene;
+    delete m_graph;
 }
 
 // private slots
@@ -67,6 +68,9 @@ void MainMenu::nodeActivated(Node *node)
 
         m_scene->addItem(newEdge);
         m_edges.push_back(newEdge);
+
+        m_graph->addEdge(newEdge);
+
         first->deactivate();
         second->deactivate();
         first = second = 0;
@@ -97,6 +101,9 @@ void MainMenu::on_pb_new_clicked()
     {
         m_nodes.clear();
     }
+
+    delete m_graph;
+    m_graph = 0;
 
     first = second = 0;
     numberOfActiveNodes = 0;

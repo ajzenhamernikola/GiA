@@ -8,7 +8,7 @@ Node *first = 0;
 Node *second = 0;
 
 MainMenu::MainMenu(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     m_ui(new Ui::MainMenu)
 {
     m_ui->setupUi(this);
@@ -19,6 +19,10 @@ MainMenu::MainMenu(QWidget *parent) :
     m_ui->gv_graph->setRenderHint(QPainter::HighQualityAntialiasing);
 
     m_graph = new Graph();
+
+    connect(m_ui->aExit,      SIGNAL(triggered(bool)), this, SLOT(close()));
+    connect(m_ui->aNewGraph,  SIGNAL(triggered(bool)), this, SLOT(on_pb_new_clicked()));
+    connect(m_ui->aSaveGraph, SIGNAL(triggered(bool)), this, SLOT(on_pb_save_clicked()));
 }
 
 MainMenu::~MainMenu()

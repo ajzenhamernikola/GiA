@@ -2,6 +2,7 @@
 #define MAINMENU_H
 
 #include <QWidget>
+#include <QMainWindow>
 #include <QGraphicsScene>
 #include <QVector>
 #include <QtAlgorithms>
@@ -19,7 +20,7 @@ namespace Ui {
 class MainMenu;
 }
 
-class MainMenu : public QWidget
+class MainMenu : public QMainWindow
 {
     Q_OBJECT
 

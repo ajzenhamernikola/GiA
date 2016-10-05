@@ -101,7 +101,7 @@ void MainMenu::on_pb_new_clicked()
     }
 
     delete m_graph;
-    m_graph = 0;
+    m_graph = new Graph();
 
     first = second = 0;
     numberOfActiveNodes = 0;

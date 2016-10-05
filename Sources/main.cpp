@@ -1,7 +1,6 @@
 #include <QApplication>
 #include <QFile>
 #include <QTextStream>
-#include <QDebug>
 
 #include "Headers/mainmenu.h"
 

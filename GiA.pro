@@ -32,3 +32,6 @@ FORMS    += Forms/mainmenu.ui
 
 DISTFILES += \
     README.md
+
+RESOURCES += \
+    Resources/textresources.qrc

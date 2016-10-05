@@ -20,9 +20,10 @@ MainMenu::MainMenu(QWidget *parent) :
 
     m_graph = new Graph();
 
-    connect(m_ui->aExit,      SIGNAL(triggered(bool)), this, SLOT(close()));
-    connect(m_ui->aNewGraph,  SIGNAL(triggered(bool)), this, SLOT(on_pb_new_clicked()));
-    connect(m_ui->aSaveGraph, SIGNAL(triggered(bool)), this, SLOT(on_pb_save_clicked()));
+    connect(m_ui->aNewGraph,    SIGNAL(triggered()), this, SLOT(on_pb_new_clicked()));
+    connect(m_ui->aSaveGraph,   SIGNAL(triggered()), this, SLOT(on_pb_save_clicked()));
+    connect(m_ui->aExportImage, SIGNAL(triggered()), this, SLOT(exportImage()));
+    connect(m_ui->aExit,        SIGNAL(triggered()), this, SLOT(close()));
 }
 
 MainMenu::~MainMenu()
@@ -117,8 +118,26 @@ void MainMenu::on_pb_new_clicked()
 void MainMenu::on_pb_save_clicked()
 {
     QString file = QFileDialog::getSaveFileName(this, tr("Save graph to a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
-    if(m_graph)
+    if(m_graph && !file.isNull())
     {
         m_graph->saveGraph(file);
+    }
+}
+
+void MainMenu::exportImage()
+{
+    QString file = QFileDialog::getSaveFileName(this, tr("Save graph to an image"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("PNG files (*.png);;JPEG files (*.JPEG);;BMP files (*.bmp)"));
+    if(!file.isNull())
+    {
+        m_scene->clearSelection();
+        QRectF rectf(m_scene->itemsBoundingRect());
+        rectf.adjust(-10, -10, 10, 10);
+        QPixmap pixmap(rectf.size().toSize());
+        pixmap.fill(Qt::white);
+
+        QPainter painter(&pixmap);
+        painter.setRenderHint(QPainter::Antialiasing);
+        m_scene->render(&painter, pixmap.rect(), rectf);
+        pixmap.save(file);
     }
 }

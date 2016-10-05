@@ -5,10 +5,11 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QVector>
-#include <QtAlgorithms>
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QStandardPaths>
+#include <QImage>
+#include <QPainter>
 
 #include "Headers/node.h"
 #include "Headers/edge.h"
@@ -35,6 +36,7 @@ private slots:
     void on_pb_addNode_clicked();
     void on_pb_new_clicked();
     void on_pb_save_clicked();
+    void exportImage();
 
 private:
     Ui::MainMenu *m_ui;

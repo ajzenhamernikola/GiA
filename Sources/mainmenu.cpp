@@ -30,16 +30,6 @@ MainMenu::~MainMenu()
 
 // private slots
 
-void MainMenu::on_pb_addNode_clicked()
-{
-    int value = m_nodes.size() + 1;
-    Node* newNode = new Node(m_scene, value);
-    QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
-    QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
-    m_scene->addItem(newNode);
-    m_nodes.push_back(newNode);
-}
-
 void MainMenu::nodeActivated(Node *node)
 {
     if(!numberOfActiveNodes)
@@ -86,6 +76,19 @@ void MainMenu::nodeDeactivated(Node *node)
     numberOfActiveNodes--;
 }
 
+void MainMenu::on_pb_addNode_clicked()
+{
+    int value = m_nodes.size() + 1;
+
+    Node* newNode = new Node(m_scene, value);
+    QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
+    QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
+
+    m_scene->addItem(newNode);
+    m_nodes.push_back(newNode);
+    m_graph->addNode(newNode);
+}
+
 void MainMenu::on_pb_new_clicked()
 {
     m_scene->clear();
@@ -105,4 +108,13 @@ void MainMenu::on_pb_new_clicked()
 
     first = second = 0;
     numberOfActiveNodes = 0;
+}
+
+void MainMenu::on_pb_save_clicked()
+{
+    QString file = QFileDialog::getSaveFileName(this, tr("Save graph to a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
+    if(m_graph)
+    {
+        m_graph->saveGraph(file);
+    }
 }

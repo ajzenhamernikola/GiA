@@ -30,7 +30,6 @@ private:
         }
     };
 
-    void readXml(const QString &file);
     void writeXml(const QString &file);
     void AppDebug();
 

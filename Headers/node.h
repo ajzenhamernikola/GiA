@@ -18,7 +18,8 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 
     int value() const;
-    bool operator==(const Node& other) const;
+    bool operator== (const Node& other) const;
+    bool operator< (const Node& other) const;
 
     void deactivate();
 

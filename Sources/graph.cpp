@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Headers\graph.h"
+#include "Headers/graph.h"
 
 // public
 

@@ -1,8 +1,8 @@
 #ifndef EDGEFACTORY_H
 #define EDGEFACTORY_H
 
-#include "../Headers/node.h"
-#include "../Headers/edge.h"
+#include "Headers/node.h"
+#include "Headers/edge.h"
 
 class EdgeFactory
 {

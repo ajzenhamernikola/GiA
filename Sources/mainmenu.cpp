@@ -1,6 +1,4 @@
 #include "Headers/mainmenu.h"
-#include "Headers/edgevaluetext.h"
-#include "Headers/edgefactory.h"
 #include "ui_mainmenu.h"
 
 // public

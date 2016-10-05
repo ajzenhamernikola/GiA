@@ -6,8 +6,8 @@
 #include <QtGui>
 #include <QPair>
 
-#include "../Headers/node.h"
-#include "../Headers/edgevaluetext.h"
+#include "Headers/node.h"
+#include "Headers/edgevaluetext.h"
 
 #define EDGE_Z_VALUE -1
 

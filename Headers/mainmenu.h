@@ -10,6 +10,7 @@
 #include "Headers/node.h"
 #include "Headers/edge.h"
 #include "Headers/edgevaluetext.h"
+#include "Headers/edgefactory.h"
 #include "Headers/graph.h"
 
 namespace Ui {

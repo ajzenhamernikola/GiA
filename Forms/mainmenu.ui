@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>GiA</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
@@ -29,6 +32,9 @@
       <widget class="QPushButton" name="pb_new">
        <property name="enabled">
         <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>New graph</string>
@@ -58,6 +64,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="QLabel" name="label_2">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
             <string>Graph creating area</string>
            </property>
@@ -86,6 +95,9 @@
            <height>300</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
         </widget>
        </item>
       </layout>
@@ -96,6 +108,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
       <widget class="QPushButton" name="pb_addNode">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
         <string>Add node</string>
        </property>
@@ -103,6 +118,9 @@
      </item>
      <item>
       <widget class="QCheckBox" name="cb_weighted">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
         <string>Weighted graph</string>
        </property>
@@ -140,6 +158,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pb_exit">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
         <string>Exit</string>
        </property>

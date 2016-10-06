@@ -6,7 +6,8 @@
 
 // public
 
-Graph::Graph()
+Graph::Graph(QGraphicsScene *scene) :
+    m_scene(scene)
 {
 
 }
@@ -31,6 +32,34 @@ void Graph::addNode(Node *n)
 void Graph::saveGraph(const QString &file)
 {
     writeXml(file);
+}
+
+void Graph::loadGraph(const QString &file)
+{
+    readXml(file);
+}
+
+QVector<Node *> Graph::nodes() const
+{
+    QVector<Node *> nodes;
+    for(auto &iter: m_adjacentList)
+    {
+        nodes.push_back(iter.first);
+    }
+    return nodes;
+}
+
+QVector<Edge *> Graph::edges() const
+{
+    QVector<Edge *> edges;
+    for(auto &iter: m_adjacentList)
+    {
+        for(auto &iter2: iter.second)
+        {
+            edges.push_back(iter2);
+        }
+    }
+    return edges;
 }
 
 // private
@@ -76,6 +105,69 @@ void Graph::writeXml(const QString &file)
 
     xml.writeEndElement();
     xml.writeEndDocument();
+
+    data.close();
+}
+
+void Graph::readXml(const QString &file)
+{
+    QFile data(file);
+    if(!data.open(QFile::ReadOnly))
+    {
+        return;
+    }
+
+    QXmlStreamReader xml(&data);
+    while(!xml.atEnd())
+    {
+        xml.readNext();
+        if(xml.isStartElement())
+        {
+            if(xml.name() == "Node")
+            {
+                QXmlStreamAttributes attributes = xml.attributes();
+
+                qreal x, y;
+                int value = attributes.value("value").toInt();
+                x =         attributes.value("x").toDouble();
+                y =         attributes.value("y").toDouble();
+                QPointF pos(x, y);
+
+                Node *newNode = new Node(m_scene, value);
+                newNode->setPos(pos);
+                m_scene->addItem(newNode);
+                addNode(newNode);
+            }
+            else if(xml.name() == "Edge")
+            {
+                QXmlStreamAttributes attributes = xml.attributes();
+                int value, first, second;
+                value =  attributes.value("value").toInt();
+                first =  attributes.value("first").toInt();
+                second = attributes.value("second").toInt();
+                Node *from, *to;
+
+                for(auto &iterNode : m_adjacentList)
+                {
+                    if(iterNode.first->value() == first)
+                    {
+                        from = iterNode.first;
+                    }
+                    else if(iterNode.first->value() == second)
+                    {
+                        to = iterNode.first;
+                    }
+                    else
+                    {}
+                }
+                Edge *newEdge = EdgeFactory::getEdge(from, to, value);
+                m_scene->addItem(newEdge);
+                addEdge(newEdge);
+            }
+            else
+            {}
+        }
+    }
 
     data.close();
 }

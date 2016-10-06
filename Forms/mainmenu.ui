@@ -50,6 +50,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="pb_load">
+        <property name="text">
+         <string>Load graph</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -193,6 +200,7 @@
     </property>
     <addaction name="aNewGraph"/>
     <addaction name="aSaveGraph"/>
+    <addaction name="aLoadGraph"/>
     <addaction name="separator"/>
     <addaction name="aExportImage"/>
     <addaction name="separator"/>
@@ -233,6 +241,17 @@
    </property>
    <property name="toolTip">
     <string>Export your created graph to an image</string>
+   </property>
+  </action>
+  <action name="aLoadGraph">
+   <property name="text">
+    <string>Load graph...</string>
+   </property>
+   <property name="toolTip">
+    <string>Load graph from previously saved file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
    </property>
   </action>
  </widget>

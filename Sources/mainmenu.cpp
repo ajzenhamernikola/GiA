@@ -18,10 +18,11 @@ MainMenu::MainMenu(QWidget *parent) :
     m_ui->gv_graph->setRenderHint(QPainter::Antialiasing);
     m_ui->gv_graph->setRenderHint(QPainter::HighQualityAntialiasing);
 
-    m_graph = new Graph();
+    m_graph = new Graph(m_scene);
 
     connect(m_ui->aNewGraph,    SIGNAL(triggered()), this, SLOT(on_pb_new_clicked()));
     connect(m_ui->aSaveGraph,   SIGNAL(triggered()), this, SLOT(on_pb_save_clicked()));
+    connect(m_ui->aLoadGraph,   SIGNAL(triggered()), this, SLOT(on_pb_load_clicked()));
     connect(m_ui->aExportImage, SIGNAL(triggered()), this, SLOT(exportImage()));
     connect(m_ui->aExit,        SIGNAL(triggered()), this, SLOT(close()));
 }
@@ -109,7 +110,7 @@ void MainMenu::on_pb_new_clicked()
     }
 
     delete m_graph;
-    m_graph = new Graph();
+    m_graph = new Graph(m_scene);
 
     first = second = 0;
     numberOfActiveNodes = 0;
@@ -122,6 +123,20 @@ void MainMenu::on_pb_save_clicked()
     {
         m_graph->saveGraph(file);
     }
+}
+
+void MainMenu::on_pb_load_clicked()
+{
+    on_pb_new_clicked();
+
+    QString file = QFileDialog::getOpenFileName(this, tr("Load graph from a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
+    if(!file.isNull())
+    {
+        m_graph->loadGraph(file);
+    }
+
+    m_nodes = m_graph->nodes();
+    m_edges = m_graph->edges();
 }
 
 void MainMenu::exportImage()

@@ -20,11 +20,11 @@ MainMenu::MainMenu(QWidget *parent) :
 
     m_graph = new Graph(m_scene);
 
-    connect(m_ui->aNewGraph,    SIGNAL(triggered()), this, SLOT(on_pb_new_clicked()));
-    connect(m_ui->aSaveGraph,   SIGNAL(triggered()), this, SLOT(on_pb_save_clicked()));
-    connect(m_ui->aLoadGraph,   SIGNAL(triggered()), this, SLOT(on_pb_load_clicked()));
-    connect(m_ui->aExportImage, SIGNAL(triggered()), this, SLOT(exportImage()));
-    connect(m_ui->aExit,        SIGNAL(triggered()), this, SLOT(close()));
+    QObject::connect(m_ui->aNewGraph,    SIGNAL(triggered()), this, SLOT(on_pb_new_clicked()));
+    QObject::connect(m_ui->aSaveGraph,   SIGNAL(triggered()), this, SLOT(on_pb_save_clicked()));
+    QObject::connect(m_ui->aLoadGraph,   SIGNAL(triggered()), this, SLOT(on_pb_load_clicked()));
+    QObject::connect(m_ui->aExportImage, SIGNAL(triggered()), this, SLOT(exportImage()));
+    QObject::connect(m_ui->aExit,        SIGNAL(triggered()), this, SLOT(close()));
 }
 
 MainMenu::~MainMenu()
@@ -137,6 +137,12 @@ void MainMenu::on_pb_load_clicked()
 
     m_nodes = m_graph->nodes();
     m_edges = m_graph->edges();
+
+    for(auto &iter : m_nodes)
+    {
+        QObject::connect(iter, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
+        QObject::connect(iter, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
+    }
 }
 
 void MainMenu::exportImage()

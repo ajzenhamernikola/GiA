@@ -1,4 +1,5 @@
-#include "Headers/mainmenu.h"
+#include "../Headers/mainmenu.h"
+#include "../Headers/edgevaluetext.h"
 #include "ui_mainmenu.h"
 
 // public
@@ -36,6 +37,31 @@ MainMenu::~MainMenu()
 
 // private slots
 
+void MainMenu::on_pb_addNode_clicked()
+{
+    int value = m_nodes.size() + 1;
+    Node* newNode = new Node(m_scene, value);
+    QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
+    QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
+    m_nodes.push_back(newNode);
+
+    // Assuming that user won't create more than 9999 nodes
+    switch (m_nodes.size())
+    {
+    case 10:
+        enlargeAllNodes(20);
+        break;
+    case 100:
+        enlargeAllNodes(30);
+        break;
+    case 1000:
+        enlargeAllNodes(40);
+        break;
+    }
+
+    m_scene->addItem(newNode);
+}
+
 void MainMenu::nodeActivated(Node *node)
 {
     if(!numberOfActiveNodes)
@@ -52,12 +78,12 @@ void MainMenu::nodeActivated(Node *node)
         if(m_ui->cb_weighted->isChecked())
         {
             int weight = QInputDialog::getInt(this, QString("Enter weight"), QString("Weight"));;
-            newEdge = EdgeFactory::getEdge(first, second, weight);
+            newEdge = new Edge(first, second, weight);
 
         }
         else
         {
-            newEdge = EdgeFactory::getEdge(first, second);
+            newEdge = new Edge(first, second);
         }
 
         m_scene->addItem(newEdge);
@@ -82,17 +108,10 @@ void MainMenu::nodeDeactivated(Node *node)
     numberOfActiveNodes--;
 }
 
-void MainMenu::on_pb_addNode_clicked()
+void MainMenu::enlargeAllNodes(qreal size)
 {
-    int value = m_nodes.size() + 1;
-
-    Node* newNode = new Node(m_scene, value);
-    QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
-    QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
-
-    m_scene->addItem(newNode);
-    m_nodes.push_back(newNode);
-    m_graph->addNode(newNode);
+    for (auto& node : m_nodes)
+        node->setRadius(size);
 }
 
 void MainMenu::on_pb_new_clicked()

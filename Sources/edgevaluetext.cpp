@@ -1,13 +1,23 @@
 #include "Headers/edgevaluetext.h"
 
+#include <QStyle>
+#include <QStyleOptionGraphicsItem>
+
 EdgeValueText::EdgeValueText(Edge *edge)
     : QGraphicsTextItem(QString::number(edge->value()), edge),
       m_edge(edge)
 {
     QObject::connect(edge, SIGNAL(moved()), this, SLOT(edgeMoved()));
     QObject::connect(edge, SIGNAL(valueChanged()), this, SLOT(updateValue()));
-    setFlag(QGraphicsItem::ItemIsSelectable);
+    setFlags(QGraphicsItem::ItemIsSelectable |
+             QGraphicsItem::ItemIsFocusable);
+    setTextInteractionFlags(Qt::TextEditorInteraction);
     edgeMoved();
+}
+
+void EdgeValueText::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    QGraphicsTextItem::paint(painter, option, widget);
 }
 
 QRectF EdgeValueText::boundingRect() const
@@ -15,9 +25,40 @@ QRectF EdgeValueText::boundingRect() const
     return QGraphicsTextItem::boundingRect();
 }
 
-void EdgeValueText::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void EdgeValueText::keyPressEvent(QKeyEvent *e)
 {
-    QGraphicsTextItem::paint(painter, option, widget);
+    if (hasFocus())
+    {
+        switch (e->key())
+        {
+        case Qt::Key_Return:
+        case Qt::Key_Escape:
+            clearFocus();
+        case Qt::Key_Space:
+            return;
+        default:
+            QGraphicsTextItem::keyPressEvent(e);
+        }
+    }
+}
+
+void EdgeValueText::focusOutEvent(QFocusEvent *e)
+{
+    QString s = toPlainText().trimmed();
+    if (s.size() == 0)
+    {
+        m_edge->setValue(1);
+    }
+    else
+    {
+        bool ok;
+        int val = s.toInt(&ok);
+        if (ok)
+            m_edge->setValue(val);
+        else
+            m_edge->setValue(m_edge->value());
+    }
+    QGraphicsTextItem::focusOutEvent(e);
 }
 
 void EdgeValueText::edgeMoved()

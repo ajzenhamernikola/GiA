@@ -45,6 +45,8 @@ private:
     QVector<Node*> m_nodes;
     QVector<Edge*> m_edges;
     Graph *m_graph;
+
+    void enlargeAllNodes(qreal size);
 };
 
 #endif // MAINMENU_H

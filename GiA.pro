@@ -18,14 +18,12 @@ SOURCES += Sources/main.cpp \
     Sources/node.cpp \
     Sources/edge.cpp \
     Sources/edgevaluetext.cpp \
-    Sources/edgefactory.cpp \
     Sources/graph.cpp
 
 HEADERS  += Headers/mainmenu.h \
     Headers/node.h \
     Headers/edge.h \
     Headers/edgevaluetext.h \
-    Headers/edgefactory.h \
     Headers/graph.h
 
 FORMS    += Forms/mainmenu.ui

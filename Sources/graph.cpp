@@ -160,7 +160,7 @@ void Graph::readXml(const QString &file)
                     else
                     {}
                 }
-                Edge *newEdge = EdgeFactory::getEdge(from, to, value);
+                Edge *newEdge = new Edge(from, to, value);
                 m_scene->addItem(newEdge);
                 addEdge(newEdge);
             }

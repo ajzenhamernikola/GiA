@@ -23,6 +23,9 @@ public:
 
     void deactivate();
 
+    void setRadius(qreal x);
+    qreal radius() const;
+
 signals:
     void activated(Node* node);
     void deactivated(Node* node);
@@ -36,6 +39,8 @@ private:
     QGraphicsScene *m_parent;
     int m_value;
     bool m_active;
+    qreal m_radius;
+    static qreal DEFAULT_RADIUS;
 };
 
 #endif // NODE_H

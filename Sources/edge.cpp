@@ -1,5 +1,6 @@
 #include "../Headers/edge.h"
 
+const qreal RATIO = 0.6;
 // public
 
 Edge::Edge(Node *from, Node *to, int value)
@@ -17,7 +18,7 @@ Edge::Edge(Node *from, Node *to, int value)
 
 QRectF Edge::boundingRect() const
 {
-    qreal penWidth = 6;
+    qreal penWidth = m_to->radius();
     qreal left, top, right, bottom;
     if(m_from->pos().x() < m_to->pos().x())
     {
@@ -45,21 +46,32 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     (void)option;
     (void)widget;
-    QLineF line(m_from->pos(), m_to->pos());
+    QLineF edge(m_from->pos(), m_to->pos());
     painter->setPen(Qt::black);
-    painter->drawLine(line);
+    painter->drawLine(edge);
     //painter->drawRect(boundingRect());
 
-    QPointF top = line.pointAt((line.length() - 10) / line.length());
-    QPointF bottom = line.pointAt((line.length() - 20) / line.length());
-    qreal angle = -1 * QLineF(bottom, top).normalVector().angle();
-    int len = 3;
-    QPointF bLeft(bottom.x() + qCos(qDegreesToRadians(angle)) * len,
-                  bottom.y() + qSin(qDegreesToRadians(angle)) * len);
-    QPointF bRight(bottom.x() + qCos(qDegreesToRadians(angle)) * -len,
-                  bottom.y() + qSin(qDegreesToRadians(angle)) * -len);
+    // Arrowhead dimensions
+    qreal h = m_to->radius();
+    qreal w = h * RATIO;
+    int edgeLen = edge.length();
 
-    QVector<QPoint> pts{top.toPoint(), bLeft.toPoint(), bRight.toPoint()};
+    // Point where the edge intersects with the node (tip of the arrow)
+    QPointF tip = edge.pointAt((edgeLen - h) / edgeLen);
+
+    // Point where arrowhead base will intersect the edge
+    QPointF baseMid = edge.pointAt((edgeLen - 2 * h) / edgeLen);
+
+    // Angle between the base of the arrowhead and the edge
+    qreal angle = -1 * edge.normalVector().angle();
+
+    // Determine base points of arrowhead using trigonometry
+    QPointF bLeft(baseMid.x() + qCos(qDegreesToRadians(angle)) * (w / 2),
+                  baseMid.y() + qSin(qDegreesToRadians(angle)) * (w / 2));
+    QPointF bRight(baseMid.x() + qCos(qDegreesToRadians(angle)) * -(w / 2),
+                  baseMid.y() + qSin(qDegreesToRadians(angle)) * -(w / 2));
+
+    QVector<QPoint> pts{tip.toPoint(), bLeft.toPoint(), bRight.toPoint()};
     painter->setBrush(Qt::black);
     painter->drawPolygon(pts);
 }

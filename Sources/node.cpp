@@ -1,11 +1,13 @@
 #include "../Headers/node.h"
 
+qreal Node::DEFAULT_RADIUS = 10;
 // public
 
 Node::Node(QGraphicsScene *parent, int value)
     : m_parent(parent),
       m_value(value),
-      m_active(false)
+      m_active(false),
+      m_radius(DEFAULT_RADIUS)
 {
     setFlag(GraphicsItemFlag::ItemIsMovable);
     setZValue(NODE_Z_VALUE);
@@ -14,8 +16,8 @@ Node::Node(QGraphicsScene *parent, int value)
 QRectF Node::boundingRect() const
 {
     qreal penWidth = 1;
-    return QRectF(-10 - penWidth/2, -10 - penWidth/2,
-                  20 + penWidth, 20 + penWidth);
+    return QRectF(-m_radius - penWidth/2, -m_radius - penWidth/2,
+                  2 * m_radius + penWidth, 2 * m_radius + penWidth);
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -33,8 +35,13 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
     painter->setPen(pen);
     painter->setBrush(Qt::white);
+
+    QString s = QString::number(m_value);
+    int w = painter->fontMetrics().width(s);
+    int h = painter->fontMetrics().height();
+
     painter->drawEllipse(boundingRect());
-    painter->drawText(-3, 4, QString::number(m_value));
+    painter->drawText(-(w / 2), h / 3, QString::number(m_value));
 }
 
 int Node::value() const
@@ -51,6 +58,19 @@ void Node::deactivate()
 {
     m_active = false;
     update();
+}
+
+void Node::setRadius(qreal x)
+{
+    prepareGeometryChange();
+    m_radius = x;
+    DEFAULT_RADIUS = x;
+    update();
+}
+
+qreal Node::radius() const
+{
+    return m_radius;
 }
 
 // protected

@@ -36,8 +36,23 @@ void MainMenu::on_pb_addNode_clicked()
     Node* newNode = new Node(m_scene, value);
     QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
     QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
-    m_scene->addItem(newNode);
     m_nodes.push_back(newNode);
+
+    // Assuming that user won't create more than 9999 nodes
+    switch (m_nodes.size())
+    {
+    case 10:
+        enlargeAllNodes(20);
+        break;
+    case 100:
+        enlargeAllNodes(30);
+        break;
+    case 1000:
+        enlargeAllNodes(40);
+        break;
+    }
+
+    m_scene->addItem(newNode);
 }
 
 void MainMenu::nodeActivated(Node *node)
@@ -81,6 +96,12 @@ void MainMenu::nodeDeactivated(Node *node)
     }
     second = 0;
     numberOfActiveNodes--;
+}
+
+void MainMenu::enlargeAllNodes(qreal size)
+{
+    for (auto& node : m_nodes)
+        node->setRadius(size);
 }
 
 void MainMenu::on_pb_new_clicked()

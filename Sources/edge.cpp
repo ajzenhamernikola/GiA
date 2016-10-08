@@ -1,4 +1,4 @@
-#include "../Headers/edge.h"
+#include "Headers/edge.h"
 
 const qreal RATIO = 0.6;
 // public

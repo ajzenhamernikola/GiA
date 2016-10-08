@@ -9,23 +9,30 @@ Node *first = 0;
 Node *second = 0;
 
 MainMenu::MainMenu(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     m_ui(new Ui::MainMenu)
 {
     m_ui->setupUi(this);
-
-    setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
 
     m_scene = new QGraphicsScene();
     m_ui->gv_graph->setScene(m_scene);
     m_ui->gv_graph->setRenderHint(QPainter::Antialiasing);
     m_ui->gv_graph->setRenderHint(QPainter::HighQualityAntialiasing);
+
+    m_graph = new Graph(m_scene);
+
+    QObject::connect(m_ui->aNewGraph,    SIGNAL(triggered()), this, SLOT(on_pb_new_clicked()));
+    QObject::connect(m_ui->aSaveGraph,   SIGNAL(triggered()), this, SLOT(on_pb_save_clicked()));
+    QObject::connect(m_ui->aLoadGraph,   SIGNAL(triggered()), this, SLOT(on_pb_load_clicked()));
+    QObject::connect(m_ui->aExportImage, SIGNAL(triggered()), this, SLOT(exportImage()));
+    QObject::connect(m_ui->aExit,        SIGNAL(triggered()), this, SLOT(close()));
 }
 
 MainMenu::~MainMenu()
 {
     delete m_ui;
     delete m_scene;
+    delete m_graph;
 }
 
 // private slots
@@ -81,6 +88,9 @@ void MainMenu::nodeActivated(Node *node)
 
         m_scene->addItem(newEdge);
         m_edges.push_back(newEdge);
+
+        m_graph->addEdge(newEdge);
+
         first->deactivate();
         second->deactivate();
         first = second = 0;
@@ -118,6 +128,56 @@ void MainMenu::on_pb_new_clicked()
         m_nodes.clear();
     }
 
+    delete m_graph;
+    m_graph = new Graph(m_scene);
+
     first = second = 0;
     numberOfActiveNodes = 0;
+}
+
+void MainMenu::on_pb_save_clicked()
+{
+    QString file = QFileDialog::getSaveFileName(this, tr("Save graph to a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
+    if(m_graph && !file.isNull())
+    {
+        m_graph->saveGraph(file);
+    }
+}
+
+void MainMenu::on_pb_load_clicked()
+{
+    on_pb_new_clicked();
+
+    QString file = QFileDialog::getOpenFileName(this, tr("Load graph from a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
+    if(!file.isNull())
+    {
+        m_graph->loadGraph(file);
+    }
+
+    m_nodes = m_graph->nodes();
+    m_edges = m_graph->edges();
+
+    for(auto &iter : m_nodes)
+    {
+        QObject::connect(iter, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
+        QObject::connect(iter, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
+    }
+}
+
+void MainMenu::exportImage()
+{
+    QString file = QFileDialog::getSaveFileName(this, tr("Save graph to an image"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("PNG files (*.png);;JPEG files (*.JPEG);;BMP files (*.bmp)"));
+    if(!file.isNull())
+    {
+        m_scene->clearSelection();
+        QRectF rectf(m_scene->itemsBoundingRect());
+        rectf.adjust(-10, -10, 10, 10);
+        QPixmap pixmap(rectf.size().toSize());
+        pixmap.fill(Qt::white);
+
+        QPainter painter(&pixmap);
+        painter.setRenderHint(QPainter::Antialiasing);
+        m_scene->render(&painter, pixmap.rect(), rectf);
+        pixmap.save(file);
+    }
 }

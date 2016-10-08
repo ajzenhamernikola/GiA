@@ -1,4 +1,4 @@
-#include "../Headers/node.h"
+#include "Headers/node.h"
 
 qreal Node::DEFAULT_RADIUS = 10;
 // public
@@ -49,9 +49,14 @@ int Node::value() const
     return m_value;
 }
 
-bool Node::operator==(const Node& other) const
+bool Node::operator== (const Node& other) const
 {
     return value() == other.value();
+}
+
+bool Node::operator < (const Node& other) const
+{
+    return m_value < other.value();
 }
 
 void Node::deactivate()

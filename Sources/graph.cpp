@@ -1,5 +1,3 @@
-//#define _GRAPH_DEBUG_
-
 #include <iostream>
 
 #include "Headers/graph.h"
@@ -16,17 +14,11 @@ void Graph::addEdge(Edge *e)
 {
     Node *key = e->nodes().first;
     m_adjacentList[key].push_back(e);
-    #ifdef _GRAPH_DEBUG_
-    AppDebug();
-    #endif
 }
 
 void Graph::addNode(Node *n)
 {
     m_adjacentList[n] = QVector<Edge *>();
-    #ifdef _GRAPH_DEBUG_
-    AppDebug();
-    #endif
 }
 
 void Graph::saveGraph(const QString &file)

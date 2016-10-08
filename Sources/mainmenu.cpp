@@ -60,6 +60,7 @@ void MainMenu::on_pb_addNode_clicked()
     }
 
     m_scene->addItem(newNode);
+    m_graph->addNode(newNode);
 }
 
 void MainMenu::nodeActivated(Node *node)

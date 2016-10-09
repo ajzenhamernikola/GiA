@@ -9,7 +9,7 @@ A GUI-oriented, graph problem-solving C++ software.
 Currently, the user is able to use several actions.
 - To create a node, click on the *Add node* button, and a new node will appear. You can drag & drop nodes everywhere around the *Graph creating area*. If you move a node, all adjacent edges will be moved with it.
 - To create an edge, double click on a node where you want an edge to begin (the selected node will be highlighted in red), and double click on another node where you want edge to end. A new edge will appear. To cancel edge creation, just double click on a beginning edge. Currently, loops are not supported.
-- To insert a weighted edge, just tick the *Weighted graph* checkbox, and create an edge. The input dialog will appear. Insert edge's weight and confirm.
+- To create a weighted edge, first create an edge (which will have weight 1 by default). Then, clicking on edge's weight will give you an option to directly edit it and insert desired weight.
 - To create a new graph, click on the *New graph* button, or choose *File* > *New graph* from the menu bar, or press Ctrl+N.
 - To save a graph to an .xml file, click on the *Save graph* button, or choose *File* > *Save graph...* from the menu bar, or press Ctrl+S.
 - To load a graph from an .xml file, click on the *Load graph* button, or choose *File* > *Load graph...* from the menu bar, or press Ctrl+L.
@@ -23,11 +23,11 @@ GiA is in a very early development stage. You can see the list of the things tha
   - [x] Creation of edges
   - [ ] Deletion of nodes
   - [ ] Deletion of edges
-- [ ] Implement basic graph procedures
+- [x] Implement basic graph procedures
   - [x] Add node
   - [x] New graph
   - [x] Insert a weighted edge
-  - [ ] Change edge's weight
+  - [x] Change edge's weight
   - [x] Export graph to an image
 - [x] Graph model implemented
   - [x] Chosen and implemented data structure

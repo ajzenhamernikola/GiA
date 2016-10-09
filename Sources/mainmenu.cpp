@@ -145,11 +145,10 @@ void MainMenu::saveGraph()
 
 void MainMenu::loadGraph()
 {
-    newGraph();
-
     QString file = QFileDialog::getOpenFileName(this, tr("Load graph from a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
     if(!file.isNull())
     {
+        newGraph();
         if(file.endsWith(QString(".xml")))
         {
             m_graph->loadGraph(file);

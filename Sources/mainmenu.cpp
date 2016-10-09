@@ -21,9 +21,9 @@ MainMenu::MainMenu(QWidget *parent) :
 
     m_graph = new Graph(m_scene);
 
-    QObject::connect(m_ui->aNewGraph,    SIGNAL(triggered()), this, SLOT(on_pb_new_clicked()));
-    QObject::connect(m_ui->aSaveGraph,   SIGNAL(triggered()), this, SLOT(on_pb_save_clicked()));
-    QObject::connect(m_ui->aLoadGraph,   SIGNAL(triggered()), this, SLOT(on_pb_load_clicked()));
+    QObject::connect(m_ui->aNewGraph,    SIGNAL(triggered()), this, SLOT(newGraph()));
+    QObject::connect(m_ui->aSaveGraph,   SIGNAL(triggered()), this, SLOT(saveGraph()));
+    QObject::connect(m_ui->aLoadGraph,   SIGNAL(triggered()), this, SLOT(loadGraph()));
     QObject::connect(m_ui->aExportImage, SIGNAL(triggered()), this, SLOT(exportImage()));
     QObject::connect(m_ui->aExit,        SIGNAL(triggered()), this, SLOT(close()));
 }
@@ -106,7 +106,7 @@ void MainMenu::enlargeAllNodes(qreal size)
         node->setRadius(size);
 }
 
-void MainMenu::on_pb_new_clicked()
+void MainMenu::newGraph()
 {
     m_scene->clear();
 
@@ -127,23 +127,37 @@ void MainMenu::on_pb_new_clicked()
     numberOfActiveNodes = 0;
 }
 
-void MainMenu::on_pb_save_clicked()
+void MainMenu::saveGraph()
 {
     QString file = QFileDialog::getSaveFileName(this, tr("Save graph to a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
     if(m_graph && !file.isNull())
     {
-        m_graph->saveGraph(file);
+        if(file.endsWith(QString(".xml")))
+        {
+            m_graph->saveGraph(file);
+        }
+        else
+        {
+            m_graph->saveGraph(file + QString(".xml"));
+        }
     }
 }
 
-void MainMenu::on_pb_load_clicked()
+void MainMenu::loadGraph()
 {
-    on_pb_new_clicked();
+    newGraph();
 
     QString file = QFileDialog::getOpenFileName(this, tr("Load graph from a file"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("XML files (*.xml)"));
     if(!file.isNull())
     {
-        m_graph->loadGraph(file);
+        if(file.endsWith(QString(".xml")))
+        {
+            m_graph->loadGraph(file);
+        }
+        else
+        {
+            m_graph->loadGraph(file + QString(".xml"));
+        }
     }
 
     m_nodes = m_graph->nodes();
@@ -158,9 +172,14 @@ void MainMenu::on_pb_load_clicked()
 
 void MainMenu::exportImage()
 {
-    QString file = QFileDialog::getSaveFileName(this, tr("Save graph to an image"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("PNG files (*.png);;JPEG files (*.JPEG);;BMP files (*.bmp)"));
+    QString file = QFileDialog::getSaveFileName(this, tr("Save graph to an image"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), tr("PNG files (*.png);;JPEG files (*.jpeg);;BMP files (*.bmp)"));
     if(!file.isNull())
     {
+        if(!file.endsWith(QString(".png"), Qt::CaseInsensitive) && !file.endsWith(QString(".JPEG"), Qt::CaseInsensitive) && !file.endsWith(QString(".bmp"), Qt::CaseInsensitive))
+        {
+            file.append(QString(".png"));
+        }
+
         m_scene->clearSelection();
         QRectF rectf(m_scene->itemsBoundingRect());
         rectf.adjust(-10, -10, 10, 10);

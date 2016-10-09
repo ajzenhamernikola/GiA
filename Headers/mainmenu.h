@@ -34,9 +34,9 @@ private slots:
     void nodeDeactivated(Node *node);
 
     void on_pb_addNode_clicked();
-    void on_pb_new_clicked();
-    void on_pb_save_clicked();
-    void on_pb_load_clicked();
+    void newGraph();
+    void saveGraph();
+    void loadGraph();
     void exportImage();
 
 private:

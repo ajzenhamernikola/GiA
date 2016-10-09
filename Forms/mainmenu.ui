@@ -28,50 +28,6 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="pb_new">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>New graph</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_save">
-        <property name="text">
-         <string>Save graph</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_load">
-        <property name="text">
-         <string>Load graph</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -198,7 +154,26 @@
    </widget>
    <addaction name="menuFile"/>
   </widget>
+  <widget class="QToolBar" name="tb_main">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="aNewGraph"/>
+   <addaction name="aSaveGraph"/>
+   <addaction name="aLoadGraph"/>
+   <addaction name="separator"/>
+  </widget>
   <action name="aNewGraph">
+   <property name="icon">
+    <iconset resource="../Resources/imageresources.qrc">
+     <normaloff>:/icons/new.png</normaloff>:/icons/new.png</iconset>
+   </property>
    <property name="text">
     <string>New graph</string>
    </property>
@@ -210,6 +185,10 @@
    </property>
   </action>
   <action name="aSaveGraph">
+   <property name="icon">
+    <iconset resource="../Resources/imageresources.qrc">
+     <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
+   </property>
    <property name="text">
     <string>Save graph...</string>
    </property>
@@ -234,6 +213,10 @@
    </property>
   </action>
   <action name="aLoadGraph">
+   <property name="icon">
+    <iconset resource="../Resources/imageresources.qrc">
+     <normaloff>:/icons/load.png</normaloff>:/icons/load.png</iconset>
+   </property>
    <property name="text">
     <string>Load graph...</string>
    </property>
@@ -246,7 +229,9 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../Resources/imageresources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>pb_exit</sender>

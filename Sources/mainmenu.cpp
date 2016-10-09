@@ -76,16 +76,7 @@ void MainMenu::nodeActivated(Node *node)
         numberOfActiveNodes++;
 
         Edge *newEdge;
-        if(m_ui->cb_weighted->isChecked())
-        {
-            int weight = QInputDialog::getInt(this, QString("Enter weight"), QString("Weight"));;
-            newEdge = new Edge(first, second, weight);
-
-        }
-        else
-        {
-            newEdge = new Edge(first, second);
-        }
+        newEdge = new Edge(first, second);
 
         m_scene->addItem(newEdge);
         m_edges.push_back(newEdge);

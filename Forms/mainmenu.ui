@@ -132,16 +132,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="cb_weighted">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Weighted graph</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>

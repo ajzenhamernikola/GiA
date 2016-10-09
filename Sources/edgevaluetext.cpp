@@ -9,8 +9,7 @@ EdgeValueText::EdgeValueText(Edge *edge)
 {
     QObject::connect(edge, SIGNAL(moved()), this, SLOT(edgeMoved()));
     QObject::connect(edge, SIGNAL(valueChanged()), this, SLOT(updateValue()));
-    setFlags(QGraphicsItem::ItemIsSelectable |
-             QGraphicsItem::ItemIsFocusable);
+    setFlag(QGraphicsItem::ItemIsFocusable);
     setTextInteractionFlags(Qt::TextEditorInteraction);
     edgeMoved();
 }

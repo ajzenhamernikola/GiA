@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="GiA.png">Icons/GiA.png</file>
+        <file alias="load.png">Icons/load.png</file>
+        <file alias="new.png">Icons/new.png</file>
+        <file alias="save.png">Icons/save.png</file>
+    </qresource>
+</RCC>

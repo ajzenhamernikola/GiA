@@ -32,4 +32,5 @@ DISTFILES += \
     README.md
 
 RESOURCES += \
-    Resources/textresources.qrc
+    Resources/textresources.qrc \
+    Resources/imageresources.qrc

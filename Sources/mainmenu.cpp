@@ -89,6 +89,7 @@ void MainMenu::nodeDeactivated(Node *node)
 void MainMenu::newGraph()
 {
     m_scene->clear();
+    m_ui->gv_graph->viewport()->update();
 
     delete m_graph;
     m_graph = new Graph(m_scene);

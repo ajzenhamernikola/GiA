@@ -33,7 +33,7 @@ private slots:
     void nodeActivated(Node *node);
     void nodeDeactivated(Node *node);
 
-    void on_pb_addNode_clicked();
+    void addNode();
     void newGraph();
     void saveGraph();
     void loadGraph();

@@ -26,6 +26,7 @@ MainMenu::MainMenu(QWidget *parent) :
     QObject::connect(m_ui->aLoadGraph,   SIGNAL(triggered()), this, SLOT(loadGraph()));
     QObject::connect(m_ui->aExportImage, SIGNAL(triggered()), this, SLOT(exportImage()));
     QObject::connect(m_ui->aExit,        SIGNAL(triggered()), this, SLOT(close()));
+    QObject::connect(m_ui->aAddNode,     SIGNAL(triggered()), this, SLOT(addNode()));
 }
 
 MainMenu::~MainMenu()
@@ -37,7 +38,7 @@ MainMenu::~MainMenu()
 
 // private slots
 
-void MainMenu::on_pb_addNode_clicked()
+void MainMenu::addNode()
 {
     int value = m_nodes.size() + 1;
     Node* newNode = new Node(m_scene, value);

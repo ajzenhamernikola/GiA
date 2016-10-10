@@ -45,10 +45,10 @@ void MainMenu::addNode()
     QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
     QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
 
-    resizeAllNodes();
-
     m_scene->addItem(newNode);
     m_graph->addNode(newNode);
+
+    resizeAllNodes();
 }
 
 void MainMenu::nodeActivated(Node *node)
@@ -96,6 +96,8 @@ void MainMenu::newGraph()
 
     first = second = 0;
     numberOfActiveNodes = 0;
+
+    resizeAllNodes();
 }
 
 void MainMenu::saveGraph()
@@ -172,21 +174,25 @@ void MainMenu::resizeAllNodes()
     // Assuming that user won't create more than 9999 nodes
     if(num >= 1000)
     {
-        enlargeAllNodes(40);
+        enlargeAllNodes(25);
     }
     else if(num >= 100)
     {
-        enlargeAllNodes(30);
+        enlargeAllNodes(20);
     }
     else if(num >= 10)
     {
-        enlargeAllNodes(20);
+        enlargeAllNodes(15);
+    }
+    else
+    {
+        enlargeAllNodes(10);
     }
 }
 
 void MainMenu::enlargeAllNodes(qreal size)
 {
     auto nodes = m_graph->nodes();
-    for (auto& node : nodes)
+    for (auto &node : nodes)
         node->setRadius(size);
 }

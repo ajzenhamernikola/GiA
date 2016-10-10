@@ -23,7 +23,7 @@ public:
 
     void deactivate();
 
-    void setRadius(qreal x);
+    void setRadius(qreal x = 10);
     qreal radius() const;
 
 signals:

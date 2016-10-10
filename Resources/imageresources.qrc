@@ -4,5 +4,7 @@
         <file alias="load.png">Icons/load.png</file>
         <file alias="new.png">Icons/new.png</file>
         <file alias="save.png">Icons/save.png</file>
+        <file alias="add.png">Icons/add.png</file>
+        <file alias="picture.png">Icons/picture.png</file>
     </qresource>
 </RCC>

@@ -75,60 +75,6 @@
       </item>
      </layout>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QPushButton" name="pb_addNode">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Add node</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <item>
-       <spacer name="horizontalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_exit">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Exit</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -137,7 +83,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -152,7 +98,14 @@
     <addaction name="separator"/>
     <addaction name="aExit"/>
    </widget>
+   <widget class="QMenu" name="menuGraph">
+    <property name="title">
+     <string>Graph</string>
+    </property>
+    <addaction name="aAddNode"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuGraph"/>
   </widget>
   <widget class="QToolBar" name="tb_main">
    <property name="windowTitle">
@@ -165,9 +118,11 @@
     <bool>false</bool>
    </attribute>
    <addaction name="aNewGraph"/>
-   <addaction name="aSaveGraph"/>
    <addaction name="aLoadGraph"/>
+   <addaction name="aSaveGraph"/>
+   <addaction name="aExportImage"/>
    <addaction name="separator"/>
+   <addaction name="aAddNode"/>
   </widget>
   <action name="aNewGraph">
    <property name="icon">
@@ -205,6 +160,10 @@
    </property>
   </action>
   <action name="aExportImage">
+   <property name="icon">
+    <iconset resource="../Resources/imageresources.qrc">
+     <normaloff>:/icons/picture.png</normaloff>:/icons/picture.png</iconset>
+   </property>
    <property name="text">
     <string>Export image...</string>
    </property>
@@ -227,27 +186,22 @@
     <string>Ctrl+L</string>
    </property>
   </action>
+  <action name="aAddNode">
+   <property name="icon">
+    <iconset resource="../Resources/imageresources.qrc">
+     <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add node</string>
+   </property>
+   <property name="toolTip">
+    <string>Add a new node to the graph</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="../Resources/imageresources.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>pb_exit</sender>
-   <signal>clicked()</signal>
-   <receiver>MainMenu</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>789</x>
-     <y>581</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>741</x>
-     <y>70</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

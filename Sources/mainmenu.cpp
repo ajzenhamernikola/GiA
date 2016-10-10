@@ -40,25 +40,12 @@ MainMenu::~MainMenu()
 
 void MainMenu::addNode()
 {
-    int value = m_nodes.size() + 1;
+    int value = m_graph->numberOfNodes() + 1;
     Node* newNode = new Node(m_scene, value);
     QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
     QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
-    m_nodes.push_back(newNode);
 
-    // Assuming that user won't create more than 9999 nodes
-    switch (m_nodes.size())
-    {
-    case 10:
-        enlargeAllNodes(20);
-        break;
-    case 100:
-        enlargeAllNodes(30);
-        break;
-    case 1000:
-        enlargeAllNodes(40);
-        break;
-    }
+    resizeAllNodes();
 
     m_scene->addItem(newNode);
     m_graph->addNode(newNode);
@@ -80,8 +67,6 @@ void MainMenu::nodeActivated(Node *node)
         newEdge = new Edge(first, second);
 
         m_scene->addItem(newEdge);
-        m_edges.push_back(newEdge);
-
         m_graph->addEdge(newEdge);
 
         first->deactivate();
@@ -101,25 +86,9 @@ void MainMenu::nodeDeactivated(Node *node)
     numberOfActiveNodes--;
 }
 
-void MainMenu::enlargeAllNodes(qreal size)
-{
-    for (auto& node : m_nodes)
-        node->setRadius(size);
-}
-
 void MainMenu::newGraph()
 {
     m_scene->clear();
-
-    if(!m_edges.empty())
-    {
-        m_edges.clear();
-    }
-
-    if(!m_nodes.empty())
-    {
-        m_nodes.clear();
-    }
 
     delete m_graph;
     m_graph = new Graph(m_scene);
@@ -160,14 +129,15 @@ void MainMenu::loadGraph()
         }
     }
 
-    m_nodes = m_graph->nodes();
-    m_edges = m_graph->edges();
+    auto nodes = m_graph->nodes();
 
-    for(auto &iter : m_nodes)
+    for(auto &iter : nodes)
     {
         QObject::connect(iter, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
         QObject::connect(iter, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
     }
+
+    resizeAllNodes();
 }
 
 void MainMenu::exportImage()
@@ -191,4 +161,31 @@ void MainMenu::exportImage()
         m_scene->render(&painter, pixmap.rect(), rectf);
         pixmap.save(file);
     }
+}
+
+// private
+
+void MainMenu::resizeAllNodes()
+{
+    int num = m_graph->numberOfNodes();
+    // Assuming that user won't create more than 9999 nodes
+    if(num >= 1000)
+    {
+        enlargeAllNodes(40);
+    }
+    else if(num >= 100)
+    {
+        enlargeAllNodes(30);
+    }
+    else if(num >= 10)
+    {
+        enlargeAllNodes(20);
+    }
+}
+
+void MainMenu::enlargeAllNodes(qreal size)
+{
+    auto nodes = m_graph->nodes();
+    for (auto& node : nodes)
+        node->setRadius(size);
 }

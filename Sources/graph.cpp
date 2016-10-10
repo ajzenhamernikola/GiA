@@ -10,15 +10,15 @@ Graph::Graph(QGraphicsScene *scene) :
 
 }
 
+void Graph::addNode(Node *n)
+{
+    m_adjacentList[n] = QVector<Edge *>();
+}
+
 void Graph::addEdge(Edge *e)
 {
     Node *key = e->nodes().first;
     m_adjacentList[key].push_back(e);
-}
-
-void Graph::addNode(Node *n)
-{
-    m_adjacentList[n] = QVector<Edge *>();
 }
 
 void Graph::saveGraph(const QString &file)
@@ -52,6 +52,11 @@ QVector<Edge *> Graph::edges() const
         }
     }
     return edges;
+}
+
+int Graph::numberOfNodes() const
+{
+    return (int)m_adjacentList.size();
 }
 
 // private

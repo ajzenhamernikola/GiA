@@ -18,12 +18,13 @@ class Graph
 public:
     Graph(QGraphicsScene *scene);
 
-    void addEdge(Edge *e);
     void addNode(Node *n);
+    void addEdge(Edge *e);
     void saveGraph(const QString &file);
     void loadGraph(const QString &file);
     QVector<Node *> nodes() const;
     QVector<Edge *> edges() const;
+    int numberOfNodes() const;
 
 private:
     class nodeComparator

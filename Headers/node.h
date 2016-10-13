@@ -5,7 +5,12 @@
 #include <QGraphicsScene>
 #include <QtGui>
 
+#include "../Headers/edge.h"
+
 #define NODE_Z_VALUE 1
+
+// Forward declaration
+class Edge;
 
 class Node : public QGraphicsObject
 {
@@ -26,6 +31,11 @@ public:
     void setRadius(qreal x = 10);
     qreal radius() const;
 
+    /* TEST */
+    QVector<Edge *> outgoingEdges() const;
+    void addOutEdge(Edge *e);
+    Edge *edgeTo(Node *oth);
+
 signals:
     void activated(Node* node);
     void deactivated(Node* node);
@@ -41,6 +51,9 @@ private:
     bool m_active;
     qreal m_radius;
     static qreal DEFAULT_RADIUS;
+
+    /* TEST */
+    QVector<Edge *> m_outEdges;
 };
 
 #endif // NODE_H

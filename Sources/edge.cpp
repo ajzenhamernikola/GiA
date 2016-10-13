@@ -14,11 +14,12 @@ Edge::Edge(Node *from, Node *to, int value)
     QObject::connect(to,    SIGNAL(yChanged()), this, SLOT(nodeMoved()));
 
     m_evt = new EdgeValueText(this);
+    m_from->addOutEdge(this);
 }
 
 QRectF Edge::boundingRect() const
 {
-    qreal penWidth = m_to->radius();
+    qreal penWidth = 4 * m_to->radius();
     qreal left, top, right, bottom;
     if(m_from->pos().x() < m_to->pos().x())
     {
@@ -44,36 +45,65 @@ QRectF Edge::boundingRect() const
 
 void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    (void)option;
-    (void)widget;
+    (void)option; (void)widget;
+
     QLineF edge(m_from->pos(), m_to->pos());
-    painter->setPen(Qt::black);
-    painter->drawLine(edge);
-    //painter->drawRect(boundingRect());
+    int len = edge.length();
+
+    Edge *e;
+    if ((e = m_to->edgeTo(m_from)) != nullptr)
+    {
+        setCurved(true);
+        e->setCurved(true);
+    }
 
     // Arrowhead dimensions
     qreal h = m_to->radius();
-    qreal w = h * RATIO;
-    int edgeLen = edge.length();
+    QPointF tip = edge.pointAt((len - h) / len);
 
-    // Point where the edge intersects with the node (tip of the arrow)
-    QPointF tip = edge.pointAt((edgeLen - h) / edgeLen);
 
-    // Point where arrowhead base will intersect the edge
-    QPointF baseMid = edge.pointAt((edgeLen - 2 * h) / edgeLen);
+    if (!m_curved)
+    {
+        qreal angle = -1 * edge.angle();
 
-    // Angle between the base of the arrowhead and the edge
-    qreal angle = -1 * edge.normalVector().angle();
+        painter->setPen(Qt::black);
+        painter->drawLine(edge);
 
-    // Determine base points of arrowhead using trigonometry
-    QPointF bLeft(baseMid.x() + qCos(qDegreesToRadians(angle)) * (w / 2),
-                  baseMid.y() + qSin(qDegreesToRadians(angle)) * (w / 2));
-    QPointF bRight(baseMid.x() + qCos(qDegreesToRadians(angle)) * -(w / 2),
-                  baseMid.y() + qSin(qDegreesToRadians(angle)) * -(w / 2));
+        QPointF t1 = tip - QPointF(
+                    qCos(qDegreesToRadians(angle + 20)) * h,
+                    qSin(qDegreesToRadians(angle + 20)) * h);
+        QPointF t2 = tip - QPointF(
+                    qCos(qDegreesToRadians(angle - 20)) * h,
+                    qSin(qDegreesToRadians(angle - 20)) * h);
 
-    QVector<QPoint> pts{tip.toPoint(), bLeft.toPoint(), bRight.toPoint()};
-    painter->setBrush(Qt::black);
-    painter->drawPolygon(pts);
+        painter->setBrush(Qt::black);
+        painter->drawPolygon(QPolygonF() << tip << t1 << t2);
+    }
+    else
+    {
+        qreal angle = -1 * edge.normalVector().angle();
+        QPointF ctrlPt = edge.pointAt(0.5) + QPointF(
+                    qCos(qDegreesToRadians(angle)) * 30,
+                    qSin(qDegreesToRadians(angle)) * 30);
+
+        QPainterPath curve(m_from->pos());
+        curve.quadTo(ctrlPt, tip);
+
+        painter->setPen(Qt::black);
+        painter->drawPath(curve);
+
+        qreal arrowAngle = -1 * QLineF(tip, ctrlPt).angle();
+        QPointF t1 = tip + QPointF(
+                    qCos(qDegreesToRadians(arrowAngle + 20)) * h,
+                    qSin(qDegreesToRadians(arrowAngle + 20)) * h);
+
+        QPointF t2 = tip + QPointF(
+                    qCos(qDegreesToRadians(arrowAngle - 20)) * h,
+                    qSin(qDegreesToRadians(arrowAngle - 20)) * h);
+
+        painter->setBrush(Qt::black);
+        painter->drawPolygon(QPolygonF() << tip << t1 << t2);
+    }
 }
 
 int Edge::value() const
@@ -105,6 +135,35 @@ EdgeValueText *Edge::evt() const
 void Edge::setEvt(EdgeValueText *evt)
 {
     m_evt = evt;
+}
+
+void Edge::setCurved(bool val)
+{
+    m_curved = val;
+    update();
+    emit moved();
+}
+
+bool Edge::isCurved() const
+{
+    return m_curved;
+}
+
+QPointF Edge::valueTextAnchor() const
+{
+    if (!m_curved)
+    {
+        return boundingRect().center();
+    }
+    else
+    {
+        QLineF edge(m_from->pos(), m_to->pos());
+        qreal angle = -1 * edge.normalVector().angle();
+        QPointF c = edge.pointAt(0.5) + QPointF(
+                    qCos(qDegreesToRadians(angle)) * 15,
+                    qSin(qDegreesToRadians(angle)) * 15);
+        return c;
+    }
 }
 
 // public slots

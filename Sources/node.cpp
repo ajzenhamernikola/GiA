@@ -7,7 +7,8 @@ Node::Node(QGraphicsScene *parent, int value)
     : m_parent(parent),
       m_value(value),
       m_active(false),
-      m_radius(DEFAULT_RADIUS)
+      m_radius(DEFAULT_RADIUS),
+      m_outEdges()
 {
     setFlag(GraphicsItemFlag::ItemIsMovable);
     setZValue(NODE_Z_VALUE);
@@ -76,6 +77,27 @@ void Node::setRadius(qreal x)
 qreal Node::radius() const
 {
     return m_radius;
+}
+
+QVector<Edge *> Node::outgoingEdges() const
+{
+    return m_outEdges;
+}
+
+void Node::addOutEdge(Edge *e)
+{
+    m_outEdges.push_back(e);
+}
+
+Edge *Node::edgeTo(Node *oth)
+{
+    if (!oth)
+        return nullptr;
+
+    for (Edge *e : m_outEdges)
+        if (*(e->nodes().second) == *oth)
+            return e;
+    return nullptr;
 }
 
 // protected

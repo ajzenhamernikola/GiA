@@ -13,6 +13,7 @@
 
 // Forward declaration
 class EdgeValueText;
+class Node;
 
 // TODO: think of a better name
 extern const qreal RATIO;
@@ -37,6 +38,11 @@ public:
     EdgeValueText *evt() const;
     void setEvt(EdgeValueText *evt);
 
+    void setCurved(bool val);
+    bool isCurved() const;
+
+    QPointF valueTextAnchor() const;
+
 public slots:
     void nodeMoved();
 
@@ -49,6 +55,8 @@ private:
     Node *m_to;
     int m_value;
     EdgeValueText *m_evt;
+
+    bool m_curved;
 };
 
 #endif // EDGE_H

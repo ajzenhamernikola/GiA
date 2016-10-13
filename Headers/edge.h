@@ -15,9 +15,6 @@
 class EdgeValueText;
 class Node;
 
-// TODO: think of a better name
-extern const qreal RATIO;
-
 class Edge : public QGraphicsObject
 {
     Q_OBJECT

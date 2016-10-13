@@ -3,9 +3,8 @@
 qreal Node::DEFAULT_RADIUS = 10;
 // public
 
-Node::Node(QGraphicsScene *parent, int value)
-    : m_parent(parent),
-      m_value(value),
+Node::Node(int value)
+    : m_value(value),
       m_active(false),
       m_radius(DEFAULT_RADIUS),
       m_outEdges()

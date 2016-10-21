@@ -62,7 +62,7 @@ void EdgeValueText::focusOutEvent(QFocusEvent *e)
 
 void EdgeValueText::edgeMoved()
 {
-    setPos(m_edge->boundingRect().center());
+    setPos(m_edge->valueTextAnchor());
     qreal angle = QLineF(m_edge->nodes().first->pos(),
                               m_edge->nodes().second->pos()).angle();
     if ((angle > 90 && angle <= 180) || (angle > 270 && angle <= 360))

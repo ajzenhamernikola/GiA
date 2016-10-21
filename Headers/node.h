@@ -5,14 +5,19 @@
 #include <QGraphicsScene>
 #include <QtGui>
 
+#include "../Headers/edge.h"
+
 #define NODE_Z_VALUE 1
+
+// Forward declaration
+class Edge;
 
 class Node : public QGraphicsObject
 {
     Q_OBJECT
 
 public:
-    explicit Node(QGraphicsScene *parent, int value);
+    explicit Node(int value);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
@@ -26,6 +31,10 @@ public:
     void setRadius(qreal x = 10);
     qreal radius() const;
 
+    QVector<Edge *> outgoingEdges() const;
+    void addOutEdge(Edge *e);
+    Edge *edgeTo(Node *oth);
+
 signals:
     void activated(Node* node);
     void deactivated(Node* node);
@@ -36,11 +45,12 @@ protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    QGraphicsScene *m_parent;
     int m_value;
     bool m_active;
     qreal m_radius;
     static qreal DEFAULT_RADIUS;
+
+    QVector<Edge *> m_outEdges;
 };
 
 #endif // NODE_H

@@ -130,7 +130,7 @@ void Graph::readXml(const QString &file)
                 y =         attributes.value("y").toDouble();
                 QPointF pos(x, y);
 
-                Node *newNode = new Node(m_scene, value);
+                Node *newNode = new Node(value);
                 newNode->setPos(pos);
                 m_scene->addItem(newNode);
                 addNode(newNode);

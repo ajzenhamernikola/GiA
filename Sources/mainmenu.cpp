@@ -41,7 +41,7 @@ MainMenu::~MainMenu()
 void MainMenu::addNode()
 {
     int value = m_graph->numberOfNodes() + 1;
-    Node* newNode = new Node(m_scene, value);
+    Node* newNode = new Node(value);
     QObject::connect(newNode, SIGNAL(activated(Node*)),   this, SLOT(nodeActivated(Node*)));
     QObject::connect(newNode, SIGNAL(deactivated(Node*)), this, SLOT(nodeDeactivated(Node*)));
 
@@ -61,13 +61,16 @@ void MainMenu::nodeActivated(Node *node)
     else
     {
         second = node;
+        if (first->edgeTo(second) == nullptr)
+        {
+            Edge *newEdge;
+            newEdge = new Edge(first, second);
+
+            m_scene->addItem(newEdge);
+            m_graph->addEdge(newEdge);
+        }
+
         numberOfActiveNodes++;
-
-        Edge *newEdge;
-        newEdge = new Edge(first, second);
-
-        m_scene->addItem(newEdge);
-        m_graph->addEdge(newEdge);
 
         first->deactivate();
         second->deactivate();

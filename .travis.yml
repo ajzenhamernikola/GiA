@@ -1,4 +1,5 @@
 language: cpp
+compiler: g++
 
 sudo: require 
 dist: trusty
@@ -31,6 +32,8 @@ before_install:
   - sudo apt-get install qt5-default qttools5-dev-tools
   - sudo apt-get install libgl1-mesa-dev 
 
+install: export CXX="g++-7"
+  
 script:
   - which qmake 
   - which make 

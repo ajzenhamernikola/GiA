@@ -31,6 +31,9 @@ before_install:
   - sudo apt-get install qt5-default qttools5-dev-tools
 
 script:
+  - ls -R
   - qmake -project
+  - ls -R
   - qmake GiA.pro
+  - ls -R
   - make

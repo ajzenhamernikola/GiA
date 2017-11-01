@@ -1,0 +1,36 @@
+language: cpp
+
+sudo: require 
+dist: trusty
+
+matrix:
+  include:
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "BH6tBXTTt0A3oR7uEs6TrzWNkhPNYXPw+XHSZobI4HAbsP3ogIOXBOz16pEr15zM74AD6ABwLlNpAeQLHZ5VqtIpWcxdhCxWJgPJTcxxv53FjXLPmum7FuzH8ivRM2v7tvtj0ZG+CWTDiKFsgSV7yeUnESDZLT+GumscSED7wLifKMobDmqT54HBIq6Mk4fwmH+rQfu2zBIDHNiaaUp1JlekDc+y92i/pxdzYKy1p9H+ziSI/2AQ6Nu3pXSuA3bJZTuo51hSe18MkOAUBiwX2pIkF4iVub8TZJ8DaG1nucB3+AjlqJurIe3iPFdiRMas6sRRRPuC7pgGaBf2tUvYEpfNs8I4rp7dbGuRZ3Ntfdcy/7b029OE3xEQl/LboexaEtZygzcA0+p/TmQxcfYm8061vrFw1dHaXUHwnD/iV4t5oYFrsNqTBuv/uK+KS4KkkPlpJsE9h/AMt7QjkDZL4egCX67+pZvrw03fxIVA/X0u8pqeRc+Xwiw0HUyPoyRiCMxyjg8MnjuX4Sz++WfcE8ZAshqOYLiNt8/AMsqTR7jahkewWk43p7X7+cHv9/qr7CfnfQqLkFYJAIEyGLzmkkbKE65MgTPkgUBGQrtCWNumWcUzl6tab5U8oxAcXzqGc5oQSevnK2ZT0Uld5PG2VXjMEjYsbE68YuPobhBmThY="
+
+before_install:
+  - eval "${MATRIX_EVAL}"
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo apt-get update -qq
+  - sudo apt-get install qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev
+  - sudo apt-get install qt5-default qttools5-dev-tools
+
+script:
+  - qmake -project
+  - qmake GiA.pro
+  - make

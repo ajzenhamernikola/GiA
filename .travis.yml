@@ -26,6 +26,7 @@ env:
 before_install:
   - eval "${MATRIX_EVAL}"
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+  - sudo apt-get install g++
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
   - sudo apt-get install qtcreator qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev

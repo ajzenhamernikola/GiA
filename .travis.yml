@@ -4,6 +4,11 @@ compiler: g++
 sudo: require 
 dist: trusty
 
+# safelist
+branches:
+  only:
+  - Travis-CI
+
 matrix:
   include:
     # works on Precise and Trusty

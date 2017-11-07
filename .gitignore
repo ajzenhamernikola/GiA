@@ -1,0 +1,10 @@
+debug/
+release/
+Travis*/
+.qmake.stash
+GiA.pro.user
+GiA_resource.rc
+Makefile
+Makefile.Debug
+Makefile.Release
+ui_mainmenu.h

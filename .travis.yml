@@ -7,7 +7,7 @@ dist: trusty
 # safelist
 branches:
   only:
-  - Travis-CI
+  - master
 
 matrix:
   include:

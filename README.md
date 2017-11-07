@@ -40,7 +40,7 @@ GiA is in a very early development stage. You can see the list of the things tha
 
 ### Build information
 
-Current build status of the project (note that the branch that is used for building is "Travis-CI" branch, not the "master" one): 
+Current build status of the project (note that the branch that is used for building is "master" branch): 
 - [![Build Status](https://travis-ci.org/theikeofficial/GiA.svg?branch=Travis-CI)](https://travis-ci.org/theikeofficial/GiA) (Linux)
 - [![Build status](https://ci.appveyor.com/api/projects/status/t3n29ynxg45pjfm2?svg=true)](https://ci.appveyor.com/project/theikeofficial/gia) (Windows)
 

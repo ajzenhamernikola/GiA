@@ -33,4 +33,4 @@ RESOURCES += \
     Resources/textresources.qrc \
     Resources/imageresources.qrc
 
-CONFIG += c++14
+CONFIG += c++11

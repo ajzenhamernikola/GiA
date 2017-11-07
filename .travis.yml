@@ -1,64 +1,41 @@
 language: cpp
 compiler: g++
-
-sudo: require 
+sudo: require
 dist: trusty
-
-# safelist
 branches:
   only:
   - master
   - coverity_scan
-
-matrix:
-  include:
-    # works on Precise and Trusty
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "nAEl6AJdkxM0W17VMwD6Xo9S5YYcTwPiSk+lz31hEoko9SXgInM5mC9eHEv18C9Az6L9PUzDamUcLsLHVbU5cRniL8A0+bNXjopnMWmJEG/cp50GUQIRQ6q9swpHMp7VQi3buWMSFprW1x+Kmgt7IGvf9CniQwZH4VjjRCZcUtFWOCiIXWRRJZpp/cOVaawy09q3hfldqhXFeA20F1B5SKQ2lRMtIWjiZ0H+p1pPhCsI+y4cnejgoe7NZR9xFz9ksEWwmqI0Ol61FTMjsyyon9C2ZlCqJLf+BIp9XWwqp+stEO2HgVQLzCdmSoCmd+P75spc3mLJR+9NahNIuVJimc1BZzR7XEH4o54VfudMB5CMPBU/Dlqo2IxSRY9t0LCnjyMhZ2th25LDd+UVBAmWlixW6W3OE1sxxC8iwXRBAWzoaKbnFMb46NPpuz/CEOKA2NctFzBI7oD+mqKLRv0vDPToJdKQNHGYxsrhSwpkFOrR7qewh05nwuOh/uLFmmzHNw5ZvcECG26qiebD/mowGI4IC/m9CaqhoWWuuGa0O9jHsUgEz4SOmyCEWlOyWUm7QOZVvSUwBA9Eiquv1jaHENnkfPuk1MOQdtlr7S4A1UDTTy34mlxgxtBl5cElGmd9hESXsX8pFNbPdPIjB1gusEdILC86O7+mceFMPtb1T+o="
-
-before_install:
-  - eval "${MATRIX_EVAL}"
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
-  - sudo apt-get install g++
-  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-  - sudo apt-get update -qq
-  - sudo apt-get install qtcreator qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev
-  - sudo apt-get install qt5-default qttools5-dev-tools
-  - sudo apt-get install libgl1-mesa-dev 
-
-install: export CXX="g++-7"
-  
-script:
-  - if [[ "${COVERITY_SCAN_BRANCH}" == 1 ]];
-      then
-        echo "Don't build on coverty_scan branch.";
-        exit 0;
-    fi
-  - which qmake 
-  - which make 
-  - qmake GiA.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
-  - make qmake_all
-  - make 
-
 addons:
   coverity_scan:
     project:
-      name: "theikeofficial/GiA"
-      description: "A GUI-oriented, graph problem-solving C++ software."
+      name: theikeofficial/GiA
     notification_email: ajzenhamernikola@gmail.com
-    build_command_prepend: "cov-configure --comptype gcc --compiler gcc-4.8"
-    build_command:   "make VERBOSE=1"
+    build_command_prepend: cov-configure --comptype gcc --compiler gcc-4.8
+    build_command: make VERBOSE=1
     branch_pattern: coverity_scan
+env:
+  global:
+  - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+  - secure: LgS+vn1QArEAPjVVThOEWa2EsnZtnbWNEqu2HbiIlsiBSEnTWNpZDCP4LUGe4ENv4GN7okXNmGQMKhRxviMpnrafWN+pX8YI2u6gw0M54o8zMMyxdEiR7m60F8NQVLHEVgAY+GDzfZQQ258OjdXmnoRfIkF10PNX1bYlsyy8sjp5aNvTUocBTXNHcwAWVCXzUHJrgFYjLVdM8BgjffK8lAi3F+WAk3AnmeAJcQcJ1FvzYV6FAZu7iP7oJ8tblm9xmpIFNjzFltJ4arvSy1FRwgoKfXTqau6wBTK+EkOItoeV9x6fkJoIFeUA2UuL5bW9UWcWrCQdVFt5NpJ0T/+OtBWzxCJ4k49S6ZdCCocU6xlck6Z6vZvJjQjnx2TFxOadh3HUXJJsiGO+ublLf4RKE/qTs3XZkCpw7jNf6/9Wf+zMb+8bCSOOkkg5UTI9nZ9eE5+AaVLGi+b67sn6QwZ6CLdmwtK6JcMpctSXVH0WUP5a/gh3kGA8FO4v9eRoTTRN+Wwr472fqCGwONpBIja4Whwjqj+qYdjLwP5GDtJtlVExVSLTvOdKoDjsdn/caemyeKL6E3VekCoXd2UI5R16H3GAvMsXmXbYAK1Llg90X3dms6Rte+OvK/rySH7JnTu70KvdhE6o0GHbfZcGm8wz+U5jpMGO5hFkRfRcF8V1CZ8=
+before_install:
+- eval "${MATRIX_EVAL}"
+- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
+- sudo apt-get install g++
+- sudo apt-get install g++-7
+- sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+- sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+- sudo apt-get update -qq
+- sudo apt-get install qtcreator qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev
+  libsqlite3-dev
+- sudo apt-get install qt5-default qttools5-dev-tools
+- sudo apt-get install libgl1-mesa-dev
+- sudo apt-get install
+install: export CXX="g++-7"
+script:
+- if [[ "${COVERITY_SCAN_BRANCH}" == 1 ]]; then echo "Don't build on coverty_scan branch."; exit 0; fi
+- which qmake
+- which make
+- qmake GiA.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
+- make qmake_all
+- make

@@ -5,14 +5,13 @@ dist: trusty
 branches:
   only:
   - master
-  - coverity_scan
 addons:
   coverity_scan:
     project:
       name: theikeofficial/GiA
     notification_email: ajzenhamernikola@gmail.com
-    build_command_prepend: cov-configure --comptype gcc --compiler gcc-4.8
-    build_command: make VERBOSE=1
+    build_command_prepend: "cov-configure --gcc && qmake GiA.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug && make qmake_all"
+    build_command: "make VERBOSE=1"
     branch_pattern: coverity_scan
 env:
   global:

@@ -41,12 +41,14 @@ GiA is in a very early development stage. You can see the list of the things tha
 ### Build information
 
 Current build status of the project (note that the branch that is used for building is "master" branch): 
-- [![Build Status](https://travis-ci.org/theikeofficial/GiA.svg?branch=Travis-CI)](https://travis-ci.org/theikeofficial/GiA) (Linux)
-- [![Build status](https://ci.appveyor.com/api/projects/status/t3n29ynxg45pjfm2?svg=true)](https://ci.appveyor.com/project/theikeofficial/gia) (Windows)
+- [![Build Status](https://travis-ci.org/theikeofficial/GiA.svg?branch=master)](https://travis-ci.org/theikeofficial/GiA) (Linux build)
+- [![Build status](https://ci.appveyor.com/api/projects/status/t3n29ynxg45pjfm2?svg=true)](https://ci.appveyor.com/project/theikeofficial/gia) (Windows build)
+- [![Build status](https://scan.coverity.com/projects/14184/badge.svg)](https://scan.coverity.com/projects/theikeofficial-gia) (Coverity)
 
 Details are available at: 
 - [https://travis-ci.org/theikeofficial/GiA](https://travis-ci.org/theikeofficial/GiA)
 - [https://ci.appveyor.com/project/theikeofficial/gia](https://ci.appveyor.com/project/theikeofficial/gia)
+- [https://scan.coverity.com/projects/theikeofficial-gia](https://scan.coverity.com/projects/theikeofficial-gia)
 
 ## Contact
 If you want to contact the developer, send an email to [ajzenhamernikola@gmail.com](mailto:ajzenhamernikola@gmail.com) with the subject starting with "\[GiA\]".

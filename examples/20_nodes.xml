@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph>
+    <Node value="1" x="-42" y="2"/>
+    <Node value="2" x="281" y="133"/>
+    <Node value="3" x="-181" y="129"/>
+    <Node value="4" x="70" y="3"/>
+    <Node value="5" x="-298" y="140"/>
+    <Node value="6" x="-321" y="-23"/>
+    <Node value="7" x="-233" y="64"/>
+    <Node value="8" x="-88" y="173"/>
+    <Node value="9" x="24" y="182"/>
+    <Node value="10" x="-308" y="-124"/>
+    <Node value="11" x="-76" y="60"/>
+    <Node value="12" x="76" y="-46"/>
+    <Node value="13" x="-92" y="-64"/>
+    <Node value="14" x="102" y="-120"/>
+    <Node value="15" x="126" y="58"/>
+    <Node value="16" x="284" y="-41"/>
+    <Node value="17" x="-86" y="-190"/>
+    <Node value="18" x="194" y="-147"/>
+    <Node value="19" x="-81" y="-301"/>
+    <Node value="20" x="-187" y="-130"/>
+    <Edge value="1" first="1" second="12"/>
+    <Edge value="1" first="2" second="11"/>
+    <Edge value="1" first="3" second="11"/>
+    <Edge value="1" first="4" second="8"/>
+    <Edge value="1" first="5" second="13"/>
+    <Edge value="1" first="6" second="20"/>
+    <Edge value="1" first="7" second="20"/>
+    <Edge value="1" first="9" second="15"/>
+    <Edge value="1" first="10" second="20"/>
+    <Edge value="1" first="11" second="13"/>
+    <Edge value="1" first="12" second="14"/>
+    <Edge value="1" first="12" second="17"/>
+    <Edge value="1" first="13" second="14"/>
+    <Edge value="1" first="14" second="17"/>
+    <Edge value="1" first="15" second="18"/>
+    <Edge value="1" first="16" second="18"/>
+    <Edge value="1" first="16" second="2"/>
+    <Edge value="1" first="17" second="18"/>
+    <Edge value="1" first="18" second="19"/>
+    <Edge value="1" first="20" second="19"/>
+</Graph>

@@ -1,12 +1,13 @@
+#include <QFileDialog>
+
 #include "../Headers/mainmenu.h"
-#include "../Headers/edgevaluetext.h"
 #include "ui_mainmenu.h"
 
 // public
 
 int numberOfActiveNodes = 0;
-Node *first = 0;
-Node *second = 0;
+Node *first = nullptr;
+Node *second = nullptr;
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -63,8 +64,7 @@ void MainMenu::nodeActivated(Node *node)
         second = node;
         if (first->edgeTo(second) == nullptr)
         {
-            Edge *newEdge;
-            newEdge = new Edge(first, second);
+	        Edge *newEdge = new Edge(first, second);
 
             m_scene->addItem(newEdge);
             m_graph->addEdge(newEdge);
@@ -74,7 +74,7 @@ void MainMenu::nodeActivated(Node *node)
 
         first->deactivate();
         second->deactivate();
-        first = second = 0;
+        first = second = nullptr;
         numberOfActiveNodes = 0;
     }
 }
@@ -85,7 +85,7 @@ void MainMenu::nodeDeactivated(Node *node)
     {
         first = second;
     }
-    second = 0;
+    second = nullptr;
     numberOfActiveNodes--;
 }
 
@@ -97,7 +97,7 @@ void MainMenu::newGraph()
     delete m_graph;
     m_graph = new Graph(m_scene);
 
-    first = second = 0;
+    first = second = nullptr;
     numberOfActiveNodes = 0;
 
     resizeAllNodes();

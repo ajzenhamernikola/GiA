@@ -1,9 +1,12 @@
+.vs/
 debug/
 release/
-Travis*/
+x64/
+
 .qmake.stash
 GiA.pro.user
 GiA_resource.rc
+GiA.vcxproj.user
 Makefile
 Makefile.Debug
 Makefile.Release

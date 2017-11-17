@@ -1,20 +1,11 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#include <QWidget>
 #include <QMainWindow>
-#include <QGraphicsScene>
-#include <QVector>
 #include <QInputDialog>
-#include <QFileDialog>
-#include <QStandardPaths>
-#include <QImage>
-#include <QPainter>
 
 #include "Headers/node.h"
 #include "Headers/edge.h"
-#include "Headers/edgevaluetext.h"
-#include "Headers/edgefactory.h"
 #include "Headers/graph.h"
 
 namespace Ui {
@@ -26,7 +17,7 @@ class MainMenu : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainMenu(QWidget *parent = 0);
+    explicit MainMenu(QWidget *parent = nullptr);
     ~MainMenu();
 
 private slots:

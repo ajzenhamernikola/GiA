@@ -3,15 +3,8 @@
 
 #include <map>
 
-#include <QVector>
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QGraphicsScene>
-
 #include "Headers/node.h"
 #include "Headers/edge.h"
-#include "Headers/edgefactory.h"
 
 class Graph
 {

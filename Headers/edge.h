@@ -1,8 +1,6 @@
 #ifndef EDGE_H
 #define EDGE_H
 
-#include <QGraphicsObject>
-#include <QGraphicsScene>
 #include <QtGui>
 #include <QPair>
 
@@ -20,7 +18,7 @@ class Edge : public QGraphicsObject
     Q_OBJECT
 
 public:
-    explicit Edge(Node *from, Node *to, int value = 1);
+    explicit Edge(Node *from, Node *to, const int value = 1);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
@@ -30,12 +28,12 @@ public:
 
     QPair<Node *, Node *> nodes() const;
 
-    void setValue(int value);
+    void setValue(const int value);
 
     EdgeValueText *evt() const;
     void setEvt(EdgeValueText *evt);
 
-    void setCurved(bool val);
+    void setCurved(const bool val);
     bool isCurved() const;
 
     QPointF valueTextAnchor() const;

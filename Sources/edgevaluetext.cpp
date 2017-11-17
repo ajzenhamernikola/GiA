@@ -1,6 +1,5 @@
 #include "Headers/edgevaluetext.h"
 
-#include <QStyle>
 #include <QStyleOptionGraphicsItem>
 
 EdgeValueText::EdgeValueText(Edge *edge)

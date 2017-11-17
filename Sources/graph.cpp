@@ -124,10 +124,9 @@ void Graph::readXml(const QString &file)
             {
                 QXmlStreamAttributes attributes = xml.attributes();
 
-                qreal x, y;
-                int value = attributes.value("value").toInt();
-                x =         attributes.value("x").toDouble();
-                y =         attributes.value("y").toDouble();
+	            int value = attributes.value("value").toInt();
+                qreal x = attributes.value("x").toDouble();
+                qreal y = attributes.value("y").toDouble();
                 QPointF pos(x, y);
 
                 Node *newNode = new Node(value);
@@ -138,11 +137,10 @@ void Graph::readXml(const QString &file)
             else if(xml.name() == "Edge")
             {
                 QXmlStreamAttributes attributes = xml.attributes();
-                int value, first, second;
-                value =  attributes.value("value").toInt();
-                first =  attributes.value("first").toInt();
-                second = attributes.value("second").toInt();
-                Node *from, *to;
+	            int value = attributes.value("value").toInt();
+                int first = attributes.value("first").toInt();
+                int second = attributes.value("second").toInt();
+                Node *from = nullptr, *to = nullptr;
 
                 for(auto &iterNode : m_adjacentList)
                 {

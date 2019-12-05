@@ -1,5 +1,6 @@
 #include <QApplication>
-
+#include <QFile>
+#include <QTextStream>
 #include "Headers/mainmenu.h"
 
 int main(int argc, char *argv[])
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
         QTextStream stylesheet(&stylesheetFile);
         a.setStyleSheet(stylesheet.readAll());
     }
+    stylesheetFile.close();
 
     MainMenu w;
     w.show();

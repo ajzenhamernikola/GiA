@@ -1,6 +1,9 @@
-#include "Headers/edgevaluetext.h"
-
 #include <QStyleOptionGraphicsItem>
+#include <QKeyEvent>
+
+#include "Headers/edge.h"
+#include "Headers/edgevaluetext.h"
+#include "Headers/node.h"
 
 EdgeValueText::EdgeValueText(Edge *edge)
     : QGraphicsTextItem(QString::number(edge->value()), edge),
@@ -32,6 +35,7 @@ void EdgeValueText::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Return:
         case Qt::Key_Escape:
             clearFocus();
+            [[fallthrough]];
         case Qt::Key_Space:
             return;
         default:

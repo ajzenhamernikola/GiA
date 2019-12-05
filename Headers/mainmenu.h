@@ -2,11 +2,10 @@
 #define MAINMENU_H
 
 #include <QMainWindow>
-#include <QInputDialog>
 
-#include "Headers/node.h"
-#include "Headers/edge.h"
-#include "Headers/graph.h"
+class QGraphicsScene;
+class Graph;
+class Node;
 
 namespace Ui {
 class MainMenu;

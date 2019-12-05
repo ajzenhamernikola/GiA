@@ -6,6 +6,8 @@
 
 QT       += core gui widgets
 
+CONFIG += c++17
+
 TARGET = GiA
 TEMPLATE = app
 
@@ -32,5 +34,3 @@ DISTFILES += \
 RESOURCES += \
     Resources/textresources.qrc \
     Resources/imageresources.qrc
-
-CONFIG += c++11

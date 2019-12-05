@@ -1,15 +1,10 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include <QGraphicsObject>
-#include <QGraphicsScene>
-#include <QtGui>
-
-#include "../Headers/edge.h"
-
 #define NODE_Z_VALUE 1
 
-// Forward declaration
+#include <QGraphicsObject>
+
 class Edge;
 
 class Node : public QGraphicsObject
@@ -19,8 +14,8 @@ class Node : public QGraphicsObject
 public:
     explicit Node(int value);
 
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
 
     int value() const;
     bool operator== (const Node& other) const;
@@ -41,8 +36,8 @@ signals:
     void moved();
 
 protected:
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
     int m_value;

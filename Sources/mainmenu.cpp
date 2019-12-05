@@ -1,13 +1,17 @@
 #include <QFileDialog>
+#include <QStandardPaths>
 
-#include "../Headers/mainmenu.h"
+#include "Headers/edge.h"
+#include "Headers/graph.h"
+#include "Headers/mainmenu.h"
+#include "Headers/node.h"
 #include "ui_mainmenu.h"
 
 // public
 
-int numberOfActiveNodes = 0;
-Node *first = nullptr;
-Node *second = nullptr;
+static int numberOfActiveNodes = 0;
+static Node *first = nullptr;
+static Node *second = nullptr;
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),

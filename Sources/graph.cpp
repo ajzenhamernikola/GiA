@@ -1,6 +1,9 @@
 #include <iostream>
-
+#include <QFile>
+#include <QXmlStreamWriter>
+#include "Headers/edge.h"
 #include "Headers/graph.h"
+#include "Headers/node.h"
 
 // public
 
@@ -56,7 +59,7 @@ QVector<Edge *> Graph::edges() const
 
 int Graph::numberOfNodes() const
 {
-    return (int)m_adjacentList.size();
+    return static_cast<int>(m_adjacentList.size());
 }
 
 // private
@@ -152,15 +155,11 @@ void Graph::readXml(const QString &file)
                     {
                         to = iterNode.first;
                     }
-                    else
-                    {}
                 }
                 Edge *newEdge = new Edge(from, to, value);
                 m_scene->addItem(newEdge);
                 addEdge(newEdge);
             }
-            else
-            {}
         }
     }
 
@@ -183,4 +182,9 @@ void Graph::AppDebug()
         std::cout << std::endl;
     }
     std::cout << std::endl << "=============================" << std::endl;
+}
+
+bool Graph::nodeComparator::operator()(Node *left, Node *right) const
+{
+    return left->value() < right->value();
 }

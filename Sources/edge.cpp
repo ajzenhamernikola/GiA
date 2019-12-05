@@ -1,4 +1,8 @@
+#include <QPainter>
+#include <QtMath>
 #include "Headers/edge.h"
+#include "Headers/node.h"
+#include "Headers/edgevaluetext.h"
 
 // public
 
@@ -47,7 +51,7 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 	(void)option; (void)widget;
 
 	QLineF edge(m_from->pos(), m_to->pos());
-	const int len = edge.length();
+    const int len = static_cast<int>(edge.length());
 
 	Edge *e;
 	if ((e = m_to->edgeTo(m_from)) != nullptr)
@@ -59,7 +63,6 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 	// Arrowhead dimensions
 	const qreal h = 0.8 * m_to->radius();
 	const QPointF tip = edge.pointAt((len - m_to->radius()) / len);
-
 
 	if (!m_curved)
 	{

@@ -1,5 +1,10 @@
 #include "Headers/node.h"
 
+#include <QPainter>
+#include <QPen>
+
+#include <Headers/edge.h>
+
 qreal Node::DEFAULT_RADIUS = 10;
 // public
 

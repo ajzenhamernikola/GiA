@@ -2,9 +2,10 @@
 #define GRAPH_H
 
 #include <map>
+#include <QGraphicsScene>
 
-#include "Headers/node.h"
-#include "Headers/edge.h"
+class Edge;
+class Node;
 
 class Graph
 {
@@ -23,10 +24,7 @@ private:
     class nodeComparator
     {
     public:
-        bool operator() (Node *left, Node *right) const
-        {
-            return left->value() < right->value();
-        }
+        bool operator() (Node *left, Node *right) const;
     };
 
     void writeXml(const QString &file);

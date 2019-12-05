@@ -1,15 +1,11 @@
 #ifndef EDGE_H
 #define EDGE_H
 
-#include <QtGui>
 #include <QPair>
-
-#include "Headers/node.h"
-#include "Headers/edgevaluetext.h"
+#include <QGraphicsObject>
 
 #define EDGE_Z_VALUE -1
 
-// Forward declaration
 class EdgeValueText;
 class Node;
 
@@ -20,8 +16,8 @@ class Edge : public QGraphicsObject
 public:
     explicit Edge(Node *from, Node *to, const int value = 1);
 
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
 
     int value() const;
     QPair<int, int> nodeValues() const;

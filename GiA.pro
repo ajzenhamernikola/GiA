@@ -9,8 +9,6 @@ QT       += core gui widgets
 CONFIG += c++1z
 
 linux-g++ | linux-g++-64 | linux-g++-32 {
-    QMAKE_CXX = g++-7
-    QMAKE_CC = gcc-7
     QMAKE_CXXFLAGS += -std=c++17
 }
 
